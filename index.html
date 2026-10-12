@@ -283,6 +283,10 @@
   .detail-wrap.open { grid-template-rows: 1fr; }
   .detail { opacity: 0; transform: translateY(24px); transition: opacity 450ms ease, transform 700ms cubic-bezier(.2,.7,.2,1); }
   .detail-wrap.open .detail { opacity: 1; transform: none; transition-delay: 180ms; }
+  /* the automatic first open on phones unfolds more gently */
+  .detail-wrap.slow { transition: grid-template-rows 1500ms cubic-bezier(.25,.6,.2,1); }
+  .detail-wrap.slow .detail { transition: opacity 1100ms ease, transform 1500ms cubic-bezier(.25,.6,.2,1); }
+  .detail-wrap.slow.open .detail { transition-delay: 450ms; }
   .detail-clip { overflow: hidden; min-height: 0; }
   .detail { padding: clamp(48px, 6vw, 88px) 0 clamp(80px, 10vw, 140px); }
 
@@ -752,7 +756,7 @@
     });
   }
 
-  // Touch screens: when the first role scrolls up into the top 60% of the screen,
+  // Touch screens: when the first role scrolls up into the top 53% of the screen,
   // open it by itself after a short pause (once per visit) so it's clear the lines open
   if (touchOnly && 'IntersectionObserver' in window) {
     const first = rows[0];
@@ -765,11 +769,15 @@
       timer = setTimeout(() => {
         if (done) return;
         const top = first.getBoundingClientRect().top;
-        if (top < 0 || top > window.innerHeight * 0.6) return;   // left the zone during the pause
+        if (top < 0 || top > window.innerHeight * 0.53) return;  // left the zone during the pause
         finish();
-        if (!rows.some(r => r.getAttribute('aria-expanded') === 'true')) setOpen(first, true);
+        if (rows.some(r => r.getAttribute('aria-expanded') === 'true')) return;
+        const w = document.getElementById(first.getAttribute('aria-controls'));
+        w.classList.add('slow');
+        setOpen(first, true);
+        setTimeout(() => w.classList.remove('slow'), 2400);
       }, reduce ? 0 : 450);
-    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    }, { rootMargin: '0px 0px -47% 0px', threshold: 0 });
     watcher.observe(first);
     rows.forEach(r => r.addEventListener('click', finish, { once: true }));
   }
