@@ -752,6 +752,26 @@
     });
   }
 
+  // Touch screens: once the visitor is past the halfway point of the page, open the first role
+  // by itself (once per visit) so it's clear the lines open
+  if (touchOnly) {
+    const first = rows[0];
+    let autoDone = false;
+    const autoOpen = () => {
+      if (autoDone) return;
+      const range = document.documentElement.scrollHeight - window.innerHeight;
+      if (range <= 0 || window.scrollY / range < 0.5) return;
+      const top = first.getBoundingClientRect().top;
+      if (top < 0 || top > window.innerHeight * 0.8) return;   // only while the line is on screen
+      autoDone = true;
+      window.removeEventListener('scroll', autoOpen);
+      if (rows.some(r => r.getAttribute('aria-expanded') === 'true')) return;  // they already opened one
+      setOpen(first, true);
+    };
+    window.addEventListener('scroll', autoOpen, { passive: true });
+    rows.forEach(r => r.addEventListener('click', () => { autoDone = true; window.removeEventListener('scroll', autoOpen); }, { once: true }));
+  }
+
   // small preview following the cursor (mouse only)
   const peek = document.getElementById('peek');
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
