@@ -284,9 +284,9 @@
   .detail { opacity: 0; transform: translateY(24px); transition: opacity 450ms ease, transform 700ms cubic-bezier(.2,.7,.2,1); }
   .detail-wrap.open .detail { opacity: 1; transform: none; transition-delay: 180ms; }
   /* the automatic first open on phones unfolds more gently */
-  .detail-wrap.slow { transition: grid-template-rows 1500ms cubic-bezier(.25,.6,.2,1); }
-  .detail-wrap.slow .detail { transition: opacity 1100ms ease, transform 1500ms cubic-bezier(.25,.6,.2,1); }
-  .detail-wrap.slow.open .detail { transition-delay: 450ms; }
+  .detail-wrap.slow { transition: grid-template-rows 3200ms cubic-bezier(.4,0,.25,1); }
+  .detail-wrap.slow .detail { transition: opacity 1300ms ease, transform 1800ms cubic-bezier(.3,.6,.2,1); }
+  .detail-wrap.slow.open .detail { transition-delay: 700ms; }
   .detail-clip { overflow: hidden; min-height: 0; }
   .detail { padding: clamp(48px, 6vw, 88px) 0 clamp(80px, 10vw, 140px); }
 
@@ -775,7 +775,7 @@
         const w = document.getElementById(first.getAttribute('aria-controls'));
         w.classList.add('slow');
         setOpen(first, true);
-        setTimeout(() => w.classList.remove('slow'), 2400);
+        setTimeout(() => w.classList.remove('slow'), 3800);
       }, reduce ? 0 : 450);
     }, { rootMargin: '0px 0px -47% 0px', threshold: 0 });
     watcher.observe(first);
