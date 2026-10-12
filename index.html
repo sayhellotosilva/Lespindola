@@ -239,6 +239,28 @@
   .role-row:hover, .role-row[aria-expanded="true"] { color: var(--white); }
   .role-row:hover .y, .role-row[aria-expanded="true"] .y { opacity: 1; }
 
+  /* Touch screens have no hover, so a soft light sweeps across each line
+     as it passes the middle of the screen, hinting that it can be tapped */
+  @keyframes sweep {
+    from { background-position: 100% 0; }
+    to   { background-position: 0 0; }
+  }
+  .role-row.sweep .r,
+  .role-row.sweep .y {
+    background-image: linear-gradient(100deg,
+      var(--red) 0%, var(--red) 42%,
+      #ffd9d9 48%, var(--white) 50%, #ffd9d9 52%,
+      var(--red) 58%, var(--red) 100%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: sweep 1100ms cubic-bezier(.45,.05,.35,1) forwards;
+  }
+  .role-row.sweep b { color: var(--white); }
+  .role-row.sweep i { color: var(--red); }
+
   /* detail panel: slides open under its line */
   .detail-wrap {
     display: grid;
@@ -695,6 +717,24 @@
       if (!wasOpen) glideTo(under(row), 950);
     });
   });
+
+  // Touch screens: sweep a light across each line as it crosses the middle of the screen
+  const touchOnly = window.matchMedia('(hover: none)').matches;
+  if (touchOnly && !reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const row = entry.target;
+        if (!entry.isIntersecting || row.getAttribute('aria-expanded') === 'true') return;
+        row.classList.remove('sweep');
+        void row.offsetWidth;            // restart the animation
+        row.classList.add('sweep');
+      });
+    }, { rootMargin: '-42% 0px -42% 0px' });
+    rows.forEach(row => {
+      io.observe(row);
+      row.querySelector('.r').addEventListener('animationend', () => row.classList.remove('sweep'));
+    });
+  }
 
   // small preview following the cursor (mouse only)
   const peek = document.getElementById('peek');
