@@ -752,24 +752,26 @@
     });
   }
 
-  // Touch screens: once the visitor is past the halfway point of the page, open the first role
-  // by itself (once per visit) so it's clear the lines open
-  if (touchOnly) {
+  // Touch screens: when the first role scrolls up into the top 60% of the screen,
+  // open it by itself after a short pause (once per visit) so it's clear the lines open
+  if (touchOnly && 'IntersectionObserver' in window) {
     const first = rows[0];
-    let autoDone = false;
-    const autoOpen = () => {
-      if (autoDone) return;
-      const range = document.documentElement.scrollHeight - window.innerHeight;
-      if (range <= 0 || window.scrollY / range < 0.5) return;
-      const top = first.getBoundingClientRect().top;
-      if (top < 0 || top > window.innerHeight * 0.8) return;   // only while the line is on screen
-      autoDone = true;
-      window.removeEventListener('scroll', autoOpen);
-      if (rows.some(r => r.getAttribute('aria-expanded') === 'true')) return;  // they already opened one
-      setOpen(first, true);
-    };
-    window.addEventListener('scroll', autoOpen, { passive: true });
-    rows.forEach(r => r.addEventListener('click', () => { autoDone = true; window.removeEventListener('scroll', autoOpen); }, { once: true }));
+    let done = false, timer = 0;
+    const finish = () => { done = true; clearTimeout(timer); watcher.disconnect(); };
+    const watcher = new IntersectionObserver(([entry]) => {
+      if (done) return;
+      clearTimeout(timer);
+      if (!entry.isIntersecting) return;
+      timer = setTimeout(() => {
+        if (done) return;
+        const top = first.getBoundingClientRect().top;
+        if (top < 0 || top > window.innerHeight * 0.6) return;   // left the zone during the pause
+        finish();
+        if (!rows.some(r => r.getAttribute('aria-expanded') === 'true')) setOpen(first, true);
+      }, reduce ? 0 : 450);
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 1 });
+    watcher.observe(first);
+    rows.forEach(r => r.addEventListener('click', finish, { once: true }));
   }
 
   // small preview following the cursor (mouse only)
