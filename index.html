@@ -249,6 +249,8 @@
   }
   .role-row:hover .chev { color: var(--white); }
   .role-row[aria-expanded="true"] .chev { transform: rotate(180deg); color: var(--white); }
+  /* arrows only on touch screens; desktop has the hover preview */
+  @media (hover: hover) { .chev { display: none; } }
 
   /* Touch screens have no hover, so a soft light sweeps across each line
      as it passes the middle of the screen, hinting that it can be tapped */
