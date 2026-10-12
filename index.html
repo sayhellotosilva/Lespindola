@@ -238,6 +238,17 @@
   .role-row .y { font-style: italic; white-space: nowrap; opacity: 0.6; font-size: 0.8em; font-variant-numeric: tabular-nums; }
   .role-row:hover, .role-row[aria-expanded="true"] { color: var(--white); }
   .role-row:hover .y, .role-row[aria-expanded="true"] .y { opacity: 1; }
+  .nw { white-space: nowrap; }
+  .chev {
+    display: inline-block;
+    margin-left: 0.4em;
+    font-size: 0.7em;
+    color: var(--red);
+    vertical-align: 0.12em;
+    transition: transform 450ms cubic-bezier(.2,.7,.2,1), color 200ms ease;
+  }
+  .role-row:hover .chev { color: var(--white); }
+  .role-row[aria-expanded="true"] .chev { transform: rotate(180deg); color: var(--white); }
 
   /* Touch screens have no hover, so a soft light sweeps across each line
      as it passes the middle of the screen, hinting that it can be tapped */
@@ -259,7 +270,7 @@
     animation: sweep 1650ms cubic-bezier(.45,.05,.35,1) forwards;
   }
   .role-row.sweep b { color: var(--white); }
-  .role-row.sweep i { color: var(--red); }
+  .role-row.sweep i, .role-row.sweep .chev { color: var(--red); }
 
   /* detail panel: slides open under its line */
   .detail-wrap {
@@ -377,7 +388,7 @@
     .about-toggle { font-size: 1.15rem; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .about-wrap, .detail-wrap, .peek, .about-wrap .about, .detail, .at-word, .at-x i { transition: none !important; }
+    .about-wrap, .detail-wrap, .peek, .about-wrap .about, .detail, .at-word, .at-x i, .chev { transition: none !important; }
   }
 </style>
 </head>
@@ -429,7 +440,7 @@
   <ul class="roles">
     <li class="role-item">
       <button class="role-row" id="r-ad" aria-expanded="false" aria-controls="d-ad" data-peek="CBC">
-        <span class="r">Associate Director <i>@</i> <b>CBC</b></span><span class="y">2019–2026</span>
+        <span class="r">Associate Director <i>@</i> <span class="nw"><b>CBC</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-ad" role="region" aria-labelledby="r-ad" inert>
         <div class="detail-clip">
@@ -461,7 +472,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-coord" aria-expanded="false" aria-controls="d-coord" data-peek="CBC Sports">
-        <span class="r">Coordinator AD <i>@</i> <b>CBC Sports</b></span><span class="y">2019–2026</span>
+        <span class="r">Coordinator AD <i>@</i> <span class="nw"><b>CBC Sports</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-coord" role="region" aria-labelledby="r-coord" inert>
         <div class="detail-clip">
@@ -480,7 +491,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-gfx" aria-expanded="false" aria-controls="d-gfx" data-peek="CBC graphics">
-        <span class="r">Senior Graphic Operator <i>@</i> <b>CBC</b></span><span class="y">2019–2026</span>
+        <span class="r">Senior Graphic Operator <i>@</i> <span class="nw"><b>CBC</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-gfx" role="region" aria-labelledby="r-gfx" inert>
         <div class="detail-clip">
@@ -499,7 +510,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-startse" aria-expanded="false" aria-controls="d-startse" data-peek="StartSe">
-        <span class="r">Filmmaker | Content Producer <i>@</i> <b>StartSe</b></span><span class="y">years</span>
+        <span class="r">Filmmaker | Content Producer <i>@</i> <span class="nw"><b>StartSe</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">years</span>
       </button>
       <div class="detail-wrap" id="d-startse" role="region" aria-labelledby="r-startse" inert>
         <div class="detail-clip">
@@ -518,7 +529,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-blackdoor" aria-expanded="false" aria-controls="d-blackdoor" data-peek="BlackDoor Films">
-        <span class="r">Filmmaker <i>@</i> <b>BlackDoor Films</b></span><span class="y">years</span>
+        <span class="r">Filmmaker <i>@</i> <span class="nw"><b>BlackDoor Films</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">years</span>
       </button>
       <div class="detail-wrap" id="d-blackdoor" role="region" aria-labelledby="r-blackdoor" inert>
         <div class="detail-clip">
@@ -538,7 +549,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-record" aria-expanded="false" aria-controls="d-record" data-peek="Record TV">
-        <span class="r">Writer | Internship <i>@</i> <b>Record TV</b></span><span class="y">years</span>
+        <span class="r">Writer | Internship <i>@</i> <span class="nw"><b>Record TV</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">years</span>
       </button>
       <div class="detail-wrap" id="d-record" role="region" aria-labelledby="r-record" inert>
         <div class="detail-clip">
@@ -556,7 +567,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-gazeta" aria-expanded="false" aria-controls="d-gazeta" data-peek="TV Gazeta">
-        <span class="r">Producer | Internship <i>@</i> <b>TV Gazeta</b></span><span class="y">years</span>
+        <span class="r">Producer | Internship <i>@</i> <span class="nw"><b>TV Gazeta</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">years</span>
       </button>
       <div class="detail-wrap" id="d-gazeta" role="region" aria-labelledby="r-gazeta" inert>
         <div class="detail-clip">
@@ -574,7 +585,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-freelance" aria-expanded="false" aria-controls="d-freelance" data-peek="Freelance">
-        <span class="r">Photographer <i>@</i> <b>Freelance</b></span><span class="y">alongside</span>
+        <span class="r">Photographer <i>@</i> <span class="nw"><b>Freelance</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">alongside</span>
       </button>
       <div class="detail-wrap" id="d-freelance" role="region" aria-labelledby="r-freelance" inert>
         <div class="detail-clip">
