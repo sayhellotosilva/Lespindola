@@ -769,7 +769,12 @@
       wrap.classList.add('open');
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Close about');
-      glideTo(under(about), 1000);
+      if (window.matchMedia('(hover: none)').matches) {
+        const y = about.getBoundingClientRect().top + window.scrollY - header.getBoundingClientRect().bottom;
+        window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+      } else {
+        glideTo(under(about), 1000);
+      }
     });
   }
   function closeAbout() {
@@ -797,6 +802,30 @@
   rows.forEach(row => {
     row.addEventListener('click', () => {
       const wasOpen = row.getAttribute('aria-expanded') === 'true';
+      if (window.matchMedia('(hover: none)').matches) {
+        // Phones: no scroll animation at all. A section open above the tapped line closes
+        // instantly (it is out of view) and the page is shifted by the same amount in the same
+        // frame, so the line doesn't move; then only the new section unfolds below it.
+        const before = row.getBoundingClientRect().top;
+        rows.forEach(r => {
+          if (r === row || r.getAttribute('aria-expanded') !== 'true') return;
+          const w = document.getElementById(r.getAttribute('aria-controls'));
+          const above = !!(w.compareDocumentPosition(row) & Node.DOCUMENT_POSITION_FOLLOWING);
+          if (above) {
+            w.style.transition = 'none';
+            const inner = w.querySelector('.detail'); if (inner) inner.style.transition = 'none';
+            setOpen(r, false);
+            void w.offsetHeight;
+            w.style.transition = ''; if (inner) inner.style.transition = '';
+          } else {
+            setOpen(r, false);
+          }
+        });
+        const shift = row.getBoundingClientRect().top - before;
+        if (Math.abs(shift) > 0.5) window.scrollBy(0, shift);
+        setOpen(row, !wasOpen);
+        return;
+      }
       rows.forEach(r => { if (r !== row && r.getAttribute('aria-expanded') === 'true') setOpen(r, false); });
       setOpen(row, !wasOpen);
       if (!wasOpen) holdRow(row, 1000);
