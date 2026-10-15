@@ -309,6 +309,22 @@
   .media { aspect-ratio: auto; height: 100%; min-height: 240px; }
   .media.strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; background: none; border: 0; }
   .media.strip .ph { aspect-ratio: auto; height: 100%; }
+
+  /* videos: fill their box; tall phone clips sit centred on black instead of being cropped */
+  .vid { position: relative; background: var(--ph); overflow: hidden; }
+  .vid video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vid.is-portrait video { object-position: 50% 45%; }
+  .snd {
+    position: absolute;
+    left: 10px; bottom: 10px;
+    padding: 0.3rem 0.6rem;
+    border: 0;
+    background: rgba(0,0,0,.6);
+    color: var(--red);
+    font: 400 0.85rem/1 var(--text);
+    cursor: pointer;
+  }
+  .snd:hover, .snd[aria-pressed="true"] { color: var(--white); }
   .missing {
     border: 1px dashed var(--dim);
     color: var(--dim);
@@ -326,6 +342,7 @@
     gap: clamp(16px, 2.5vw, 32px);
     list-style: none; margin: 0; padding: 0;
   }
+  .games .tile { aspect-ratio: 4 / 5; width: 100%; }
   .games li b { display: block; font: 400 1.6rem/1.1 var(--black-letter); margin: 0.9rem 0 0.15rem; }
   .games li span { font-size: calc(1rem + var(--plus)); }
   .games li small { display: block; color: var(--dim); font-style: italic; font-size: calc(0.95rem + var(--plus)); margin-top: 0.3rem; }
@@ -342,6 +359,7 @@
     transition: opacity 150ms ease;
   }
   .peek.on { opacity: 1; }
+  .peek.has-img { background-size: cover; background-position: center; color: transparent; }
 
   /* ---------- Footer: contact, quick facts, links ---------- */
   .site-footer {
@@ -387,6 +405,7 @@
     .media { aspect-ratio: 16 / 9; height: auto; min-height: 0; }
     .media.strip { aspect-ratio: auto; }
     .media.strip .ph { aspect-ratio: 1; }
+    .vid.media.is-portrait { aspect-ratio: 4 / 5; }
     .facts { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 480px) {
@@ -448,7 +467,7 @@
   <h2 class="label">Experience</h2>
   <ul class="roles">
     <li class="role-item">
-      <button class="role-row" id="r-ad" aria-expanded="false" aria-controls="d-ad" data-peek="CBC">
+      <button class="role-row" id="r-ad" aria-expanded="false" aria-controls="d-ad" data-peek="CBC" data-peek-img="media/cbc-associate-director.jpg">
         <span class="r">Associate Director <i>@</i> <span class="nw"><b>CBC</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-ad" role="region" aria-labelledby="r-ad" inert>
@@ -461,7 +480,10 @@
                 <p>On the sports side, I package and time out shows and live events, write detailed notes for commentators, and help turn complex productions into seamless broadcasts.</p>
                 <p>* Delivered live coverage across <span class="w">3 Olympic Games: Beijing 2022, Paris 2024</span> &amp; <span class="w">Milano-Cortina 2026.</span></p>
               </div>
-              <div class="ph media">gif / video: live news &amp; sports</div>
+              <div class="vid media">
+                <video src="media/cbc-associate-director.mp4" poster="media/cbc-associate-director.jpg" muted loop playsinline preload="none" aria-label="Le working as Associate Director in the CBC control room"></video>
+                <button class="snd" type="button" aria-pressed="false">Sound on</button>
+              </div>
             </div>
             <div class="olympics">
               <div class="olympics-head">
@@ -470,9 +492,14 @@
                 <span>Case study</span>
               </div>
               <ul class="games">
-                <li><div class="ph">photo</div><b>2026</b><span>Milano-Cortina</span><small>caption to add</small></li>
-                <li><div class="ph">photo</div><b>2024</b><span>Paris</span><small>caption to add</small></li>
-                <li><div class="ph">photo</div><b>2022</b><span>Beijing</span><small>caption to add</small></li>
+                <li><div class="vid tile">
+                <video src="media/olympics-milano-cortina-studio.mp4" poster="media/olympics-milano-cortina-studio.jpg" muted loop playsinline preload="none" aria-label="The CBC Milano-Cortina 2026 studio"></video>
+              </div><b>2026</b><span>Milano-Cortina</span><small>On set in the CBC Olympics studio</small></li>
+                <li><div class="vid tile">
+                <video src="media/olympics-milano-cortina-pov.mp4" poster="media/olympics-milano-cortina-pov.jpg" muted loop playsinline preload="none" aria-label="Point of view from the control room during the Milano-Cortina coverage"></video>
+                <button class="snd" type="button" aria-pressed="false">Sound on</button>
+              </div><b>2026</b><span>Milano-Cortina</span><small>POV: part of the MiCo Olympic coverage</small></li>
+                <li><div class="ph tile">photo to come</div><b>2024 · 2022</b><span>Paris · Beijing</span><small>Photos from the deck to come</small></li>
               </ul>
             </div>
           </div>
@@ -480,7 +507,7 @@
       </div>
     </li>
     <li class="role-item">
-      <button class="role-row" id="r-coord" aria-expanded="false" aria-controls="d-coord" data-peek="CBC Sports">
+      <button class="role-row" id="r-coord" aria-expanded="false" aria-controls="d-coord" data-peek="CBC Sports" data-peek-img="media/cbc-sports-control-room.jpg">
         <span class="r">Coordinator AD <i>@</i> <span class="nw"><b>CBC Sports</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-coord" role="region" aria-labelledby="r-coord" inert>
@@ -492,14 +519,16 @@
                 <p>Backfill experience leading the behind-the-scenes coordination of CBC Sports, from pre-production meetings and show lineups to commercial integrations, sponsorships and music clearance.</p>
                 <p>Working closely with producers and technical teams, I make sure every element is editorially accurate, commercially aligned and ready for live TV and Streaming platforms (CBC Gem).</p>
               </div>
-              <div class="ph media">gif / video: CBC Sports and CBC Gem</div>
+              <div class="vid media is-portrait">
+                <video src="media/cbc-sports-control-room.mp4" poster="media/cbc-sports-control-room.jpg" muted loop playsinline preload="none" aria-label="CBC Sports control room during the Olympics"></video>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </li>
     <li class="role-item">
-      <button class="role-row" id="r-gfx" aria-expanded="false" aria-controls="d-gfx" data-peek="CBC graphics">
+      <button class="role-row" id="r-gfx" aria-expanded="false" aria-controls="d-gfx" data-peek="CBC graphics" data-peek-img="media/cbc-elections-graphics.jpg">
         <span class="r">Senior Graphic Operator <i>@</i> <span class="nw"><b>CBC</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-gfx" role="region" aria-labelledby="r-gfx" inert>
@@ -511,7 +540,10 @@
                 <p>I create and operate live TV graphics using <span class="w">Viz Trio and Viz Artist</span>, collaborating with producers, video editors and ADs to bring broadcasts to life in real time.</p>
                 <p>In this role, I've worked on major national and international productions including Canadian &amp; U.S. elections, Royal events, the Giller Prize, and Family Feud Canada.</p>
               </div>
-              <div class="ph media">gif / video: live graphics in Viz</div>
+              <div class="vid media">
+                <video src="media/cbc-elections-graphics.mp4" poster="media/cbc-elections-graphics.jpg" muted loop playsinline preload="none" aria-label="CBC News live election graphics"></video>
+                <button class="snd" type="button" aria-pressed="false">Sound on</button>
+              </div>
             </div>
           </div>
         </div>
@@ -537,7 +569,7 @@
       </div>
     </li>
     <li class="role-item">
-      <button class="role-row" id="r-blackdoor" aria-expanded="false" aria-controls="d-blackdoor" data-peek="BlackDoor Films">
+      <button class="role-row" id="r-blackdoor" aria-expanded="false" aria-controls="d-blackdoor" data-peek="BlackDoor Films" data-peek-img="media/blackdoor-films-reel.jpg">
         <span class="r">Filmmaker <i>@</i> <span class="nw"><b>BlackDoor Films</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">years</span>
       </button>
       <div class="detail-wrap" id="d-blackdoor" role="region" aria-labelledby="r-blackdoor" inert>
@@ -550,7 +582,10 @@
                 <p class="w">Managed end-to-end production workflows from pre-production planning through final asset delivery.</p>
                 <p>Worked closely with clients and post-production teams to create on-screen graphics ensuring visual consistency with each client's brand identity.</p>
               </div>
-              <div class="ph media">video</div>
+              <div class="vid media">
+                <video src="media/blackdoor-films-reel.mp4" poster="media/blackdoor-films-reel.jpg" muted loop playsinline preload="none" aria-label="BlackDoor Films reel"></video>
+                <button class="snd" type="button" aria-pressed="false">Sound on</button>
+              </div>
             </div>
           </div>
         </div>
@@ -782,13 +817,43 @@
     rows.forEach(r => r.addEventListener('click', finish, { once: true }));
   }
 
+  // Videos: play (muted) only while their section is open and they are on screen
+  const videos = [...document.querySelectorAll('.vid video')];
+  const visible = new Set();
+  const isOpen = v => !v.closest('.detail-wrap') || v.closest('.detail-wrap').classList.contains('open');
+  const sync = () => videos.forEach(v => {
+    if (visible.has(v) && isOpen(v)) { if (v.paused) v.play().catch(() => {}); }
+    else if (!v.paused) v.pause();
+  });
+  if ('IntersectionObserver' in window) {
+    const vio = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)); sync(); }, { threshold: 0.25 });
+    videos.forEach(v => vio.observe(v));
+  }
+  document.querySelectorAll('.detail-wrap').forEach(w => new MutationObserver(sync).observe(w, { attributes: true, attributeFilter: ['class'] }));
+  document.querySelectorAll('.snd').forEach(btn => btn.addEventListener('click', () => {
+    const v = btn.parentElement.querySelector('video');
+    const on = v.muted;
+    videos.forEach(o => { if (o !== v) { o.muted = true; const b = o.parentElement.querySelector('.snd'); if (b) { b.textContent = 'Sound on'; b.setAttribute('aria-pressed', 'false'); } } });
+    v.muted = !on;
+    if (on) v.play().catch(() => {});
+    btn.textContent = on ? 'Sound off' : 'Sound on';
+    btn.setAttribute('aria-pressed', on);
+  }));
+
   // small preview following the cursor (mouse only)
   const peek = document.getElementById('peek');
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     rows.forEach(row => {
       row.addEventListener('mouseenter', () => {
         if (row.getAttribute('aria-expanded') === 'true') return;
-        peek.textContent = 'photo: ' + row.dataset.peek;
+        if (row.dataset.peekImg) {
+          peek.style.backgroundImage = `url("${row.dataset.peekImg}")`;
+          peek.classList.add('has-img');
+        } else {
+          peek.style.backgroundImage = '';
+          peek.classList.remove('has-img');
+          peek.textContent = 'photo: ' + row.dataset.peek;
+        }
         peek.classList.add('on');
       });
       row.addEventListener('mousemove', e => { peek.style.left = e.clientX + 'px'; peek.style.top = e.clientY + 'px'; });
