@@ -311,8 +311,8 @@
   .detail-text p { margin: 0 0 1.1em; text-align: justify; hyphens: auto; }
   .detail-text p:last-child { margin-bottom: 0; }
   .media { aspect-ratio: auto; height: 100%; min-height: 240px; }
-  /* videos keep their full 16:9 frame (nothing cropped); if the text is taller, they stretch to match it */
-  .vid.media:not(.is-portrait) { width: 100%; height: auto; aspect-ratio: 16 / 9; align-self: stretch; }
+  /* every experience video uses the same full 16:9 frame */
+  .vid.media { width: 100%; height: auto; min-height: 0; aspect-ratio: 16 / 9; align-self: start; }
   .media.strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; background: none; border: 0; }
   .media.strip .ph { aspect-ratio: auto; height: 100%; }
 
@@ -411,7 +411,6 @@
     .media { aspect-ratio: 16 / 9; height: auto; min-height: 0; }
     .media.strip { aspect-ratio: auto; }
     .media.strip .ph { aspect-ratio: 1; }
-    .vid.media.is-portrait { aspect-ratio: 4 / 5; }
     .facts { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 480px) {
@@ -513,7 +512,7 @@
       </div>
     </li>
     <li class="role-item">
-      <button class="role-row" id="r-coord" aria-expanded="false" aria-controls="d-coord" data-peek="CBC Sports" data-peek-img="media/cbc-sports-control-room.jpg">
+      <button class="role-row" id="r-coord" aria-expanded="false" aria-controls="d-coord" data-peek="CBC Sports" data-peek-img="media/cbc-sports-control-room-v2.jpg">
         <span class="r">Coordinator AD <i>@</i> <span class="nw"><b>CBC Sports</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-coord" role="region" aria-labelledby="r-coord" inert>
@@ -525,8 +524,9 @@
                 <p>Backfill experience leading the behind-the-scenes coordination of CBC Sports, from pre-production meetings and show lineups to commercial integrations, sponsorships and music clearance.</p>
                 <p>Working closely with producers and technical teams, I make sure every element is editorially accurate, commercially aligned and ready for live TV and Streaming platforms (CBC Gem).</p>
               </div>
-              <div class="vid media is-portrait">
-                <video src="media/cbc-sports-control-room.mp4" poster="media/cbc-sports-control-room.jpg" muted loop playsinline preload="none" aria-label="CBC Sports control room during the Olympics"></video>
+              <div class="vid media">
+                <video src="media/cbc-sports-control-room-v2.mp4" poster="media/cbc-sports-control-room-v2.jpg" muted loop playsinline preload="none" aria-label="CBC Sports control room during the Olympics"></video>
+                <button class="snd" type="button" aria-pressed="false">Sound on</button>
               </div>
             </div>
           </div>
