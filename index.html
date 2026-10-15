@@ -146,6 +146,10 @@
   .hero-photo {
     width: min(560px, 78vw);
     aspect-ratio: 16 / 10;
+    height: auto;
+    object-fit: cover;
+    object-position: 55% 40%;
+    display: block;
   }
   .photo-box { position: relative; }
   .hero h1 {
@@ -197,7 +201,7 @@
   }
   .about-grid p { margin: 0 0 1.1em; text-align: justify; hyphens: auto; }
   .langs { color: var(--white); letter-spacing: 0.02em; }
-  .about-grid .portrait { aspect-ratio: auto; height: 100%; min-height: 280px; }
+  .about-grid .portrait { aspect-ratio: auto; width: 100%; height: 100%; min-height: 280px; object-fit: cover; object-position: 50% 45%; display: block; }
   .cv-link {
     display: inline-block;
     margin-top: 1.5rem;
@@ -430,7 +434,7 @@
   <div class="hero-stage">
     <div class="hero-photo-wrap">
       <div class="photo-box">
-        <div class="ph hero-photo">portrait, black and white</div>
+        <img class="hero-photo" src="media/le-espindola-cover.jpg" alt="Le Espindola, black and white portrait outdoors in a scarf and sunglasses" width="2000" height="1332" fetchpriority="high">
         <h1>Le<span class="dot">•</span>Espindola</h1>
       </div>
     </div>
@@ -451,7 +455,7 @@
           <p>With a Bachelor's <span class="w">degree in Radio, TV, and Internet</span> and a <span class="w">certificate in Graphic Design</span> for Print and Web, I've been fortunate to work in various creative roles. From TV channels to advertising agencies and startups, I've gained an invaluable experience along the way as Assistant Director, Filmmaker, and Producer.</p>
           <p>Passionate and dedicated, I love bringing ideas to life and creating captivating visuals.</p>
         </div>
-        <div class="ph portrait">portrait</div>
+        <img class="portrait" src="media/le-espindola-about.jpg" alt="Le Espindola, black and white film portrait in glasses" width="754" height="1120" loading="lazy">
         <div>
           <p>Currently, I am an Associate Director and Senior Graphic Operator for live TV in Toronto, and <span class="w">looking to relocate to Spain in January 2027.</span></p>
           <p>Alongside my role, I freelance and volunteer as a <span class="w">Photographer, collaborating with independent businesses, bands and events</span> to create visuals and engaging social media content.</p>
