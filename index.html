@@ -297,7 +297,7 @@
   /* text and image share one row; the image always takes the text's height */
   .detail-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     gap: clamp(24px, 4vw, 64px);
     align-items: stretch;
   }
@@ -311,6 +311,8 @@
   .detail-text p { margin: 0 0 1.1em; text-align: justify; hyphens: auto; }
   .detail-text p:last-child { margin-bottom: 0; }
   .media { aspect-ratio: auto; height: 100%; min-height: 240px; }
+  /* videos keep their full 16:9 frame (nothing cropped); if the text is taller, they stretch to match it */
+  .vid.media:not(.is-portrait) { width: 100%; height: auto; aspect-ratio: 16 / 9; align-self: stretch; }
   .media.strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; background: none; border: 0; }
   .media.strip .ph { aspect-ratio: auto; height: 100%; }
 
@@ -737,6 +739,30 @@
   }
   const under = el => () => el.getBoundingClientRect().top + window.scrollY - header.getBoundingClientRect().bottom;
 
+  // Keeps a line pinned on screen while panels above it collapse and its own panel opens,
+  // so switching sections reads as one movement instead of close, jump, then scroll.
+  const soft = t => (1 - Math.cos(Math.PI * t)) / 2;   // gentle in, gentle out
+  function holdRow(row, duration) {
+    const run = ++scrollRun;
+    const top0 = row.getBoundingClientRect().top;
+    const headerBottom = header.getBoundingClientRect().bottom;
+    const goal = top0 > window.innerHeight * 0.45 ? headerBottom + 24 : Math.max(top0, headerBottom);
+    if (reduce) { window.scrollBy(0, row.getBoundingClientRect().top - goal); return; }
+    const t0 = performance.now();
+    const stop = () => { scrollRun++; cleanup(); };
+    const cleanup = () => { window.removeEventListener('wheel', stop); window.removeEventListener('touchstart', stop); };
+    window.addEventListener('wheel', stop, { passive: true });
+    window.addEventListener('touchstart', stop, { passive: true });
+    (function frame(now) {
+      if (run !== scrollRun) return;
+      const t = Math.min(1, (now - t0) / duration);
+      const want = top0 + (goal - top0) * soft(t);
+      const drift = row.getBoundingClientRect().top - want;
+      if (Math.abs(drift) > 0.5) window.scrollBy(0, drift);
+      if (t < 1) requestAnimationFrame(frame); else cleanup();
+    })(t0);
+  }
+
   function openAbout() {
     about.hidden = false;
     requestAnimationFrame(() => {
@@ -773,7 +799,7 @@
       const wasOpen = row.getAttribute('aria-expanded') === 'true';
       rows.forEach(r => { if (r !== row && r.getAttribute('aria-expanded') === 'true') setOpen(r, false); });
       setOpen(row, !wasOpen);
-      if (!wasOpen) glideTo(under(row), 950);
+      if (!wasOpen) holdRow(row, 1000);
     });
   });
 
