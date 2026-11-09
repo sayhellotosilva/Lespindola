@@ -370,7 +370,7 @@
   .works { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 72px) clamp(20px, 3vw, 40px); }
   /* one square photo per project; the next photo peeks in at the right edge */
   .sq { --peek: clamp(28px, 3.5vw, 44px); --gap: 8px; overflow: hidden; }
-  .sq-track { display: flex; align-items: flex-start; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; padding-right: calc(var(--peek) + var(--gap)); }
+  .sq-track { display: flex; align-items: flex-start; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; }
   .sq-track::-webkit-scrollbar { display: none; }
   .sq-track:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
   .sq-track img { flex: 0 0 calc(100% - var(--peek)); width: calc(100% - var(--peek)); height: auto; aspect-ratio: 1; object-fit: cover; display: block; background: var(--ph); scroll-snap-align: start; user-select: none; }
