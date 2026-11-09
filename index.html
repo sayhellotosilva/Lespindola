@@ -345,6 +345,26 @@
   .yt:hover img { transform: scale(1.03); }
   .yt-label { position: absolute; left: 10px; bottom: 10px; padding: 0.3rem 0.6rem; background: rgba(0,0,0,.6); color: var(--red); font: 400 0.85rem/1 var(--text); }
   .yt:hover .yt-label { color: var(--white); }
+  /* video reel: one 16:9 frame, arrows to step through */
+  .reel.media { height: auto; min-height: 0; align-self: start; }
+  .reel-stage { position: relative; aspect-ratio: 16 / 9; background: var(--ph); overflow: hidden; }
+  .reel .slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 350ms ease, visibility 0s linear 350ms; }
+  .reel .slide.on { opacity: 1; visibility: visible; transition: opacity 350ms ease; }
+  .yt-play { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: #000; cursor: pointer; }
+  .yt-play img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85; transition: opacity 200ms ease; }
+  .yt-play:hover img { opacity: 1; }
+  .yt-play .play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; padding-left: 4px; background: rgba(0,0,0,.6); color: var(--red); transition: color 150ms ease, background 150ms ease; }
+  .yt-play:hover .play { color: var(--white); background: var(--red); }
+  .slide iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .reel-bar { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-top: 0.75rem; font-size: 0.9em; }
+  .reel-title { opacity: 0.7; min-width: 0; }
+  .reel-nav { display: flex; align-items: baseline; gap: 0.6rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .reel-count { opacity: 0.7; }
+  .reel-nav button { border: 0; background: none; padding: 0.2rem 0.35rem; color: var(--red); font: 400 1.35rem/1 var(--text); cursor: pointer; transition: color 150ms ease, transform 150ms ease; }
+  .reel-nav button:hover { color: var(--white); }
+  .reel-next:hover { transform: translateX(3px); }
+  .reel-prev:hover { transform: translateX(-3px); }
+  .reel.single .reel-nav { display: none; }
   .missing {
     border: 1px dashed var(--dim);
     color: var(--dim);
@@ -499,15 +519,17 @@
                 <p>I package and time out shows and live events to fit their broadcast windows, from pre-production with producers and editors through to delivery. I'm the QC checkpoint between creative, technical and editorial teams, fixing editing, graphics and timing before and during air, and I write segment notes for commentators.</p>
                 <p>I also manage music licensing and clearance for live and sports programmes, and build show lineups, commercial formats and sponsorship integrations.</p>
                 <p>* Edit Suite AD for <span class="w">Beijing 2022</span> &amp; <span class="w">Paris 2024</span>, and Control Room AD for <span class="w">Milano-Cortina 2026</span>: over 6 hours live every day, reaching 30.5 million viewers in Canada.</p>
-                <ul class="credits">
-                  <li><b><a href="https://www.cbc.ca/player/play/video/9.6957086" target="_blank" rel="noopener">Milano-Cortina 2026 <i aria-hidden="true">↗</i></a></b><span>Control Room AD, Olympic coverage</span></li>
-                  <li><b><a href="https://www.youtube.com/live/rgrnET7ZgEo" target="_blank" rel="noopener">Remembrance Day 2025 <i aria-hidden="true">↗</i></a></b><span>CBC News Special</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=nl_ccoKB9Es" target="_blank" rel="noopener">Quebec Election Night <i aria-hidden="true">↗</i></a></b><span>AD, 4+ hours live</span></li>
-                </ul>
               </div>
-              <div class="vid media">
-                <video src="media/cbc-associate-director.mp4" poster="media/cbc-associate-director.jpg" muted loop playsinline preload="none" aria-label="Le working as Associate Director in the CBC control room"></video>
-                <button class="snd" type="button" aria-pressed="false">Sound on</button>
+              <div class="reel media" data-reel>
+                <div class="reel-stage">
+                  <div class="slide vid" data-title="In the CBC control room">
+                    <video src="media/cbc-associate-director.mp4" poster="media/cbc-associate-director.jpg" muted loop playsinline preload="none" aria-label="Le working as Associate Director in the CBC control room"></video>
+                    <button class="snd" type="button" aria-pressed="false">Sound on</button>
+                  </div>
+                  <div class="slide yt" data-yt="rgrnET7ZgEo" data-title="Remembrance Day 2025 · CBC News Special"><button class="yt-play" type="button" aria-label="Play: Remembrance Day 2025 · CBC News Special"><img src="https://i.ytimg.com/vi/rgrnET7ZgEo/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/rgrnET7ZgEo/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="nl_ccoKB9Es" data-title="Quebec Election Night · AD, 4+ hours live"><button class="yt-play" type="button" aria-label="Play: Quebec Election Night · AD, 4+ hours live"><img src="https://i.ytimg.com/vi/nl_ccoKB9Es/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/nl_ccoKB9Es/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                </div>
+                <div class="reel-bar"><span class="reel-title"></span><span class="reel-nav"><button class="reel-prev" type="button" aria-label="Previous video">←</button><span class="reel-count"></span><button class="reel-next" type="button" aria-label="Next video">→</button></span></div>
               </div>
             </div>
             <div class="olympics">
@@ -565,16 +587,19 @@
                 <h3>Senior Graphic Operator</h3>
                 <p>I create and operate live TV graphics using <span class="w">Viz Trio and Viz Artist</span>, collaborating with producers, video editors and ADs to bring broadcasts to life in real time.</p>
                 <p>In this role, I've worked on major national and international productions including Canadian &amp; U.S. elections, the Eurovision contest, Royal events, CBC Sports live shows, the Commonwealth Games, the Giller Prize and Family Feud Canada.</p>
-                <ul class="credits">
-                  <li><b><a href="https://www.youtube.com/watch?v=FDENB_6_xaQ" target="_blank" rel="noopener">Eurovision Song Contest: Canada's Choice <i aria-hidden="true">↗</i></a></b><span>Live graphics</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=SATBOqyYODU" target="_blank" rel="noopener">Canada Votes 2025 <i aria-hidden="true">↗</i></a></b><span>Election night graphics</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=d8fuJLr9FvU" target="_blank" rel="noopener">U.S. Election 2024 <i aria-hidden="true">↗</i></a></b><span>Live results graphics</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=MV0z6SW2z2c" target="_blank" rel="noopener">2023 Scotiabank Giller Prize <i aria-hidden="true">↗</i></a></b><span>Live graphics</span></li>
-                </ul>
               </div>
-              <div class="vid media">
-                <video src="media/cbc-elections-graphics.mp4" poster="media/cbc-elections-graphics.jpg" muted loop playsinline preload="none" aria-label="CBC News live election graphics"></video>
-                <button class="snd" type="button" aria-pressed="false">Sound on</button>
+              <div class="reel media" data-reel>
+                <div class="reel-stage">
+                  <div class="slide vid" data-title="CBC News election graphics">
+                    <video src="media/cbc-elections-graphics.mp4" poster="media/cbc-elections-graphics.jpg" muted loop playsinline preload="none" aria-label="CBC News live election graphics"></video>
+                    <button class="snd" type="button" aria-pressed="false">Sound on</button>
+                  </div>
+                  <div class="slide yt" data-yt="FDENB_6_xaQ" data-title="Eurovision Song Contest: Canada's Choice"><button class="yt-play" type="button" aria-label="Play: Eurovision Song Contest: Canada's Choice"><img src="https://i.ytimg.com/vi/FDENB_6_xaQ/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/FDENB_6_xaQ/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="SATBOqyYODU" data-title="Canada Votes 2025"><button class="yt-play" type="button" aria-label="Play: Canada Votes 2025"><img src="https://i.ytimg.com/vi/SATBOqyYODU/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/SATBOqyYODU/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="d8fuJLr9FvU" data-title="U.S. Election 2024"><button class="yt-play" type="button" aria-label="Play: U.S. Election 2024"><img src="https://i.ytimg.com/vi/d8fuJLr9FvU/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/d8fuJLr9FvU/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="MV0z6SW2z2c" data-title="2023 Scotiabank Giller Prize"><button class="yt-play" type="button" aria-label="Play: 2023 Scotiabank Giller Prize"><img src="https://i.ytimg.com/vi/MV0z6SW2z2c/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/MV0z6SW2z2c/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                </div>
+                <div class="reel-bar"><span class="reel-title"></span><span class="reel-nav"><button class="reel-prev" type="button" aria-label="Previous video">←</button><span class="reel-count"></span><button class="reel-next" type="button" aria-label="Next video">→</button></span></div>
               </div>
             </div>
           </div>
@@ -594,19 +619,22 @@
                 <p>Produced, shot and edited multi-camera content for TV and YouTube: advertising campaigns, institutional videos and interview series. Clients included <span class="w">Propmark</span> (a weekly online programme), <span class="w">Decolar &amp; Despegar.com</span> (the biggest online travel company in Latin America) and Go Ahead Consulting &amp; Training.</p>
                 <p>Managed workflows from pre-production planning through final delivery, and designed on-screen graphics consistent with each client's brand identity.</p>
                 <p>Handled production logistics: crew, shoot scheduling, equipment, daily shooting and editing.</p>
-                <ul class="credits">
-                  <li><b><a href="https://www.youtube.com/watch?v=2f5teXT9vqI" target="_blank" rel="noopener">Decolar: Black Friday <i aria-hidden="true">↗</i></a></b><span>Video production &amp; photo assistant</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=JkCZ6OmD0AE" target="_blank" rel="noopener">RecargaPay: Jogo <i aria-hidden="true">↗</i></a></b><span>Advertising</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=tsWvhIa7ZcE" target="_blank" rel="noopener">Sompo Seguros: Faixa Preta, making of <i aria-hidden="true">↗</i></a></b><span>Advertising</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=OqCZpvY_tio" target="_blank" rel="noopener">Achilles International Brazil <i aria-hidden="true">↗</i></a></b><span>Camera &amp; sound, documentary</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=v1DK_jvCXt8" target="_blank" rel="noopener">Propmark: Três passos para a produção de um vídeo eficaz <i aria-hidden="true">↗</i></a></b><span>Weekly online programme</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=CwCSGdiHD74" target="_blank" rel="noopener">Propmark: Canal E! aposta no Brasil <i aria-hidden="true">↗</i></a></b><span>Weekly online programme</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=BLuREF6OAwI" target="_blank" rel="noopener">Propmark: Grupo Boticário cresce 7% <i aria-hidden="true">↗</i></a></b><span>Weekly online programme</span></li>
-                </ul>
               </div>
-              <div class="vid media">
-                <video src="media/blackdoor-films-reel.mp4" poster="media/blackdoor-films-reel.jpg" muted loop playsinline preload="none" aria-label="BlackDoor Films reel"></video>
-                <button class="snd" type="button" aria-pressed="false">Sound on</button>
+              <div class="reel media" data-reel>
+                <div class="reel-stage">
+                  <div class="slide vid" data-title="BlackDoor Films reel">
+                    <video src="media/blackdoor-films-reel.mp4" poster="media/blackdoor-films-reel.jpg" muted loop playsinline preload="none" aria-label="BlackDoor Films reel"></video>
+                    <button class="snd" type="button" aria-pressed="false">Sound on</button>
+                  </div>
+                  <div class="slide yt" data-yt="2f5teXT9vqI" data-title="Decolar · Black Friday"><button class="yt-play" type="button" aria-label="Play: Decolar · Black Friday"><img src="https://i.ytimg.com/vi/2f5teXT9vqI/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/2f5teXT9vqI/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="JkCZ6OmD0AE" data-title="RecargaPay · Jogo"><button class="yt-play" type="button" aria-label="Play: RecargaPay · Jogo"><img src="https://i.ytimg.com/vi/JkCZ6OmD0AE/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/JkCZ6OmD0AE/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="tsWvhIa7ZcE" data-title="Sompo Seguros · Faixa Preta, making of"><button class="yt-play" type="button" aria-label="Play: Sompo Seguros · Faixa Preta, making of"><img src="https://i.ytimg.com/vi/tsWvhIa7ZcE/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/tsWvhIa7ZcE/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="OqCZpvY_tio" data-title="Achilles International Brazil"><button class="yt-play" type="button" aria-label="Play: Achilles International Brazil"><img src="https://i.ytimg.com/vi/OqCZpvY_tio/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/OqCZpvY_tio/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="v1DK_jvCXt8" data-title="Propmark · Três passos para a produção de um vídeo eficaz"><button class="yt-play" type="button" aria-label="Play: Propmark · Três passos para a produção de um vídeo eficaz"><img src="https://i.ytimg.com/vi/v1DK_jvCXt8/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/v1DK_jvCXt8/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="CwCSGdiHD74" data-title="Propmark · Canal E! aposta no Brasil"><button class="yt-play" type="button" aria-label="Play: Propmark · Canal E! aposta no Brasil"><img src="https://i.ytimg.com/vi/CwCSGdiHD74/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/CwCSGdiHD74/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="BLuREF6OAwI" data-title="Propmark · Grupo Boticário cresce 7%"><button class="yt-play" type="button" aria-label="Play: Propmark · Grupo Boticário cresce 7%"><img src="https://i.ytimg.com/vi/BLuREF6OAwI/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/BLuREF6OAwI/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                </div>
+                <div class="reel-bar"><span class="reel-title"></span><span class="reel-nav"><button class="reel-prev" type="button" aria-label="Previous video">←</button><span class="reel-count"></span><button class="reel-next" type="button" aria-label="Next video">→</button></span></div>
               </div>
             </div>
           </div>
@@ -626,14 +654,16 @@
                 <p>Produced video and photo content for online courses, events and campaigns, working as producer, on-camera host, camera operator and editor.</p>
                 <p>Coordinated content strategy across YouTube, Instagram and LinkedIn, managed event video assets and campaign rollouts, and operated live streams for events.</p>
                 <p>Set up the company's audiovisual area and led the team delivering <span class="w">StartSe TV</span>, a new channel project.</p>
-                <ul class="credits">
-                  <li><b><a href="https://www.youtube.com/watch?v=Vv2DeJVhND4" target="_blank" rel="noopener">Startup da Semana: Yubb <i aria-hidden="true">↗</i></a></b><span>Hosting &amp; editing</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=HKzRztD09xo" target="_blank" rel="noopener">LawTech Conference 2018 <i aria-hidden="true">↗</i></a></b><span>Video editing</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=EzAIyQO6J5o" target="_blank" rel="noopener">Se Liga no Ecossistema: Rei Leão <i aria-hidden="true">↗</i></a></b><span>Shooting &amp; editing</span></li>
-                  <li><b><a href="https://www.youtube.com/watch?v=H5kDnzlYfcU" target="_blank" rel="noopener">Se Liga no Ecossistema: O que é uma aceleradora? <i aria-hidden="true">↗</i></a></b><span>Shooting &amp; editing</span></li>
-                </ul>
               </div>
-              <div class="ph media">video / photo</div>
+              <div class="reel media" data-reel>
+                <div class="reel-stage">
+                  <div class="slide yt" data-yt="Vv2DeJVhND4" data-title="Startup da Semana: Yubb · hosting &amp; editing"><button class="yt-play" type="button" aria-label="Play: Startup da Semana: Yubb · hosting &amp; editing"><img src="https://i.ytimg.com/vi/Vv2DeJVhND4/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/Vv2DeJVhND4/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="HKzRztD09xo" data-title="LawTech Conference 2018 · editing"><button class="yt-play" type="button" aria-label="Play: LawTech Conference 2018 · editing"><img src="https://i.ytimg.com/vi/HKzRztD09xo/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/HKzRztD09xo/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="EzAIyQO6J5o" data-title="Se Liga no Ecossistema: Rei Leão · shooting &amp; editing"><button class="yt-play" type="button" aria-label="Play: Se Liga no Ecossistema: Rei Leão · shooting &amp; editing"><img src="https://i.ytimg.com/vi/EzAIyQO6J5o/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/EzAIyQO6J5o/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="H5kDnzlYfcU" data-title="Se Liga no Ecossistema: O que é uma aceleradora?"><button class="yt-play" type="button" aria-label="Play: Se Liga no Ecossistema: O que é uma aceleradora?"><img src="https://i.ytimg.com/vi/H5kDnzlYfcU/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/H5kDnzlYfcU/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                </div>
+                <div class="reel-bar"><span class="reel-title"></span><span class="reel-nav"><button class="reel-prev" type="button" aria-label="Previous video">←</button><span class="reel-count"></span><button class="reel-next" type="button" aria-label="Next video">→</button></span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -717,17 +747,20 @@
                 <h3>Audiovisual</h3>
                 <p>Alongside studying and my first TV jobs, I made things on my own: a YouTube channel, short films, commercials and radio content.</p>
                 <ul class="credits">
-                  <li><b>Música Pra Quem?</b><span>2016–2018 · Co-founder, producer, host &amp; editor of a YouTube channel on the Brazilian independent music scene. Best Experimental Radio, TV and Internet Project 2017, Cásper Líbero. <a class="inline" href="https://www.youtube.com/@musicapraquem" target="_blank" rel="noopener">Channel ↗</a> · <a class="inline" href="https://www.youtube.com/watch?v=wHZTAp3vjkI" target="_blank" rel="noopener">Far From Alaska interview ↗</a></span></li>
-                  <li><b>Jogo da Meia Noite</b><span>2016 · Production, casting &amp; sound capture for the short film. <a class="inline" href="https://www.youtube.com/watch?v=Cynlaqkd0Zs" target="_blank" rel="noopener">Watch ↗</a></span></li>
+                  <li><b>Música Pra Quem?</b><span>2016–2018 · Co-founder, producer, host &amp; editor of a YouTube channel on the Brazilian independent music scene. Best Experimental Radio, TV and Internet Project 2017, Cásper Líbero. <a class="inline" href="https://www.youtube.com/@musicapraquem" target="_blank" rel="noopener">Channel ↗</a></span></li>
+                  <li><b>Jogo da Meia Noite</b><span>2016 · Production, casting &amp; sound capture for the short film.</span></li>
                   <li><b>Vem Comigo: Reciclagem</b><span>2015 · Videographer &amp; host, TV Gazeta, aired on open TV</span></li>
                   <li><b>Punto Com</b><span>2015 · General producer of the video commercial, voiceover of the radio spot. Best Direction &amp; Best Audiovisual Producer, Cásper Líbero</span></li>
                   <li><b>2G conteúdo</b><span>2015 · Writing, voiceover, editing &amp; production of radio and internet content</span></li>
                 </ul>
               </div>
-              <a class="yt media" href="https://www.youtube.com/watch?v=Cynlaqkd0Zs" target="_blank" rel="noopener" aria-label="Watch Jogo da Meia Noite on YouTube">
-                <img src="https://i.ytimg.com/vi/Cynlaqkd0Zs/hqdefault.jpg" alt="" loading="lazy">
-                <span class="yt-label">Jogo da Meia Noite · Watch on YouTube ↗</span>
-              </a>
+              <div class="reel media" data-reel>
+                <div class="reel-stage">
+                  <div class="slide yt" data-yt="Cynlaqkd0Zs" data-title="Jogo da Meia Noite · short film"><button class="yt-play" type="button" aria-label="Play: Jogo da Meia Noite · short film"><img src="https://i.ytimg.com/vi/Cynlaqkd0Zs/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/Cynlaqkd0Zs/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="slide yt" data-yt="wHZTAp3vjkI" data-title="Música Pra Quem? · Far From Alaska interview"><button class="yt-play" type="button" aria-label="Play: Música Pra Quem? · Far From Alaska interview"><img src="https://i.ytimg.com/vi/wHZTAp3vjkI/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/wHZTAp3vjkI/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                </div>
+                <div class="reel-bar"><span class="reel-title"></span><span class="reel-nav"><button class="reel-prev" type="button" aria-label="Previous video">←</button><span class="reel-count"></span><button class="reel-next" type="button" aria-label="Next video">→</button></span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -957,7 +990,7 @@
   // Videos: play (muted) only while their section is open and they are on screen
   const videos = [...document.querySelectorAll('.vid video')];
   const visible = new Set();
-  const isOpen = v => !v.closest('.detail-wrap') || v.closest('.detail-wrap').classList.contains('open');
+  const isOpen = v => (!v.closest('.detail-wrap') || v.closest('.detail-wrap').classList.contains('open')) && !v.closest('.slide:not(.on)');
   const sync = () => videos.forEach(v => {
     if (visible.has(v) && isOpen(v)) { if (v.paused) v.play().catch(() => {}); }
     else if (!v.paused) v.pause();
@@ -976,6 +1009,58 @@
     btn.textContent = on ? 'Sound off' : 'Sound on';
     btn.setAttribute('aria-pressed', on);
   }));
+
+  // Video reels: arrows step through native clips and YouTube videos (loaded only on click)
+  const ytIdle = sl => {
+    const f = sl.querySelector('iframe');
+    if (f) { f.remove(); sl.querySelector('.yt-play').hidden = false; }
+  };
+  document.querySelectorAll('.yt-play img').forEach(img => {
+    const fb = () => { if (img.dataset.fallback && img.src !== img.dataset.fallback) img.src = img.dataset.fallback; };
+    img.addEventListener('error', fb);
+    img.addEventListener('load', () => { if (img.naturalWidth <= 120) fb(); });
+  });
+  document.querySelectorAll('[data-reel]').forEach(reel => {
+    const slides = [...reel.querySelectorAll('.slide')];
+    const title = reel.querySelector('.reel-title');
+    const count = reel.querySelector('.reel-count');
+    let i = 0;
+    if (slides.length < 2) reel.classList.add('single');
+    const show = n => {
+      slides[i].classList.contains('yt') && ytIdle(slides[i]);
+      i = (n + slides.length) % slides.length;
+      slides.forEach((sl, k) => sl.classList.toggle('on', k === i));
+      title.textContent = slides[i].dataset.title || '';
+      count.textContent = (i + 1) + ' / ' + slides.length;
+      sync();
+    };
+    reel.querySelector('.reel-prev').addEventListener('click', () => show(i - 1));
+    reel.querySelector('.reel-next').addEventListener('click', () => show(i + 1));
+    reel.querySelectorAll('.yt-play').forEach(btn => btn.addEventListener('click', () => {
+      const sl = btn.closest('.slide');
+      videos.forEach(v => { v.muted = true; const b = v.parentElement.querySelector('.snd'); if (b) { b.textContent = 'Sound on'; b.setAttribute('aria-pressed', 'false'); } });
+      const f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + sl.dataset.yt + '?autoplay=1&rel=0&playsinline=1&modestbranding=1';
+      f.title = sl.dataset.title || 'Video';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      btn.hidden = true;
+      sl.appendChild(f);
+    }));
+    // swipe on touch screens
+    let x0 = null;
+    const stage = reel.querySelector('.reel-stage');
+    stage.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) show(dx < 0 ? i + 1 : i - 1);
+    });
+    // stop YouTube when the section closes
+    const wrap = reel.closest('.detail-wrap');
+    if (wrap) new MutationObserver(() => { if (!wrap.classList.contains('open')) slides.forEach(sl => sl.classList.contains('yt') && ytIdle(sl)); }).observe(wrap, { attributes: true, attributeFilter: ['class'] });
+    show(0);
+  });
 
   // small preview following the cursor (mouse only)
   const peek = document.getElementById('peek');
