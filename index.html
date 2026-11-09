@@ -207,7 +207,7 @@
     margin-bottom: clamp(2.75rem, 5vw, 4.5rem);
   }
   .about-head h2 { margin: 0; font: 400 clamp(2.4rem, 5vw, 3.6rem)/1 var(--black-letter); }
-  .about-head span { font: 400 clamp(1.3rem, 2.4vw, 1.9rem)/1 var(--black-letter); }
+  .about-head span { font: 400 clamp(1.3rem, 2.4vw, 1.9rem)/1 "Schmaltzy Light", var(--black-letter); opacity: 0.7; }
   .about-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -420,6 +420,8 @@
   .olympics { margin-top: clamp(64px, 8vw, 110px); }
   .olympics-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.25rem; }
   .olympics-head h4 { margin: 0; font: 400 1.6rem/1 var(--black-letter); white-space: nowrap; }
+  /* the label after the rule ("Case study"): thinner and lighter than the heading */
+  .olympics-head > span:last-child { font: 400 1.3rem/1 "Schmaltzy Light", var(--black-letter); opacity: 0.7; white-space: nowrap; }
   .games {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
