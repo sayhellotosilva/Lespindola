@@ -422,12 +422,13 @@
   .olympics-head h4 { margin: 0; font: 400 1.6rem/1 var(--black-letter); white-space: nowrap; }
   /* the label after the rule ("Case study"): thinner and lighter than the heading */
   .olympics-head > span:last-child { font: 400 1.3rem/1 "Schmaltzy Light", var(--black-letter); opacity: 0.7; white-space: nowrap; }
-  .games {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(16px, 2.5vw, 32px);
-    list-style: none; margin: 0; padding: 0;
-  }
+  /* Olympics strip: a sideways carousel; three fit, the next one peeks in at the right */
+  .games { display: flex; gap: clamp(16px, 2.5vw, 32px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; list-style: none; margin: 0; padding: 0; }
+  .games::-webkit-scrollbar { display: none; }
+  .games > li { flex: 0 0 30%; min-width: 0; scroll-snap-align: start; }
+  .games img.tile { display: block; object-fit: cover; background: var(--ph); }
+  .games-bar { display: flex; justify-content: flex-end; margin-top: 1rem; }
+  .games-bar button:disabled { opacity: 0.3; cursor: default; }
   .games .tile { aspect-ratio: 4 / 5; width: 100%; }
   .games li b { display: block; font: 400 1.6rem/1.1 var(--black-letter); margin: 0.9rem 0 0.15rem; }
   .games li span { font-size: calc(1rem + var(--plus)); }
@@ -499,7 +500,7 @@
   }
   @media (max-width: 480px) {
     .role-row { font-size: 1.3rem; }
-    .games { grid-template-columns: 1fr; }
+    .games > li { flex-basis: 80%; }
     .works { grid-template-columns: 1fr; width: 100%; }
     .facts { grid-template-columns: 1fr; gap: 2rem; }
     .route { font-size: 1.1rem; }
@@ -594,7 +595,7 @@
                 <span class="rule" aria-hidden="true"></span>
                 <span>Case study</span>
               </div>
-              <ul class="games">
+              <ul class="games" tabindex="0" aria-label="Olympic Games, scroll sideways">
                 <li><div class="vid tile">
                 <video src="media/olympics-milano-cortina-studio.mp4" poster="media/olympics-milano-cortina-studio.jpg" muted loop playsinline preload="none" aria-label="The CBC Milano-Cortina 2026 studio"></video>
               </div><b>2026</b><span>Milano-Cortina</span><small>On set in the CBC Olympics studio</small></li>
@@ -602,8 +603,10 @@
                 <video src="media/olympics-milano-cortina-pov.mp4" poster="media/olympics-milano-cortina-pov.jpg" muted loop playsinline preload="none" aria-label="Point of view from the control room during the Milano-Cortina coverage"></video>
                 <button class="snd" type="button" aria-pressed="false">Sound on</button>
               </div><b>2026</b><span>Milano-Cortina</span><small>POV: part of the MiCo Olympic coverage</small></li>
-                <li><div class="ph tile">photo to come</div><b>2024 · 2022</b><span>Paris · Beijing</span><small>Photos from the deck to come</small></li>
+                <li><img class="tile" src="https://lh3.googleusercontent.com/d/1AsY23wPjjQGDnS_rQE-hzHWIahnTwlby=w1200" alt="Le Espindola during CBC's Paris 2024 Olympic coverage" loading="lazy" referrerpolicy="no-referrer"><b>2024</b><span>Paris</span><small>Edit Suite AD for the Olympic and Paralympic coverage</small></li>
+                <li><div class="ph tile">photo to come</div><b>2022</b><span>Beijing</span><small>Edit Suite AD for the Olympic and Paralympic coverage</small></li>
               </ul>
+              <div class="games-bar"><span class="reel-nav"><button class="g-prev" type="button" aria-label="Previous Games">←</button><button class="g-next" type="button" aria-label="Next Games">→</button></span></div>
             </div>
           </div>
         </div>
@@ -1223,6 +1226,18 @@
     if (w.classList.contains('open')) return;
     w.querySelectorAll('.vsq iframe').forEach(f => { f.parentElement.querySelector('.yt-play').hidden = false; f.remove(); });
   }).observe(w, { attributes: true, attributeFilter: ['class'] }); });
+
+  // Olympics carousel: arrows move one Games at a time
+  document.querySelectorAll('.games').forEach(g => {
+    const bar = g.nextElementSibling; if (!bar || !bar.classList.contains('games-bar')) return;
+    const prev = bar.querySelector('.g-prev'), next = bar.querySelector('.g-next');
+    const step = () => { const li = g.children; return li.length > 1 ? li[1].offsetLeft - li[0].offsetLeft : g.clientWidth; };
+    const upd = () => { prev.disabled = g.scrollLeft < 4; next.disabled = g.scrollLeft + g.clientWidth >= g.scrollWidth - 4; };
+    prev.addEventListener('click', () => g.scrollBy({ left: -step(), behavior: reduce ? 'auto' : 'smooth' }));
+    next.addEventListener('click', () => g.scrollBy({ left: step(), behavior: reduce ? 'auto' : 'smooth' }));
+    g.addEventListener('scroll', () => requestAnimationFrame(upd), { passive: true });
+    new ResizeObserver(upd).observe(g); upd();
+  });
 
   // small preview following the cursor (mouse only)
   const peek = document.getElementById('peek');
