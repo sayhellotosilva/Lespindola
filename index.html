@@ -382,7 +382,7 @@
   .reel-prev:hover { transform: translateX(-3px); }
   .reel.single .reel-nav { display: none; }
   /* photography case study: two photos per project, side by side */
-  .works { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 72px) clamp(20px, 3vw, 40px); }
+  .works { list-style: none; margin: 0; padding: 0; width: 80%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 72px) clamp(20px, 3vw, 40px); }
   /* one square photo per project; the next photo peeks in at the right edge */
   .sq { --peek: clamp(28px, 3.5vw, 44px); --gap: 8px; overflow: hidden; }
   .sq-track { display: flex; align-items: flex-start; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; }
@@ -496,7 +496,7 @@
   @media (max-width: 480px) {
     .role-row { font-size: 1.3rem; }
     .games { grid-template-columns: 1fr; }
-    .works { grid-template-columns: 1fr; }
+    .works { grid-template-columns: 1fr; width: 100%; }
     .facts { grid-template-columns: 1fr; gap: 2rem; }
     .route { font-size: 1.1rem; }
     .about-toggle { font-size: 1.25rem; }
