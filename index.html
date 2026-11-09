@@ -364,15 +364,15 @@
   .reel-next:hover { transform: translateX(3px); }
   .reel-prev:hover { transform: translateX(-3px); }
   .reel.single .reel-nav { display: none; }
-  /* photo tiles: two photos per project, hover (or tap) shows the second */
-  .shots { position: relative; display: block; padding: 0; border: 0; overflow: hidden; cursor: pointer; font: inherit; }
-  .shots::before { content: attr(data-label); position: absolute; inset: 0; display: grid; place-items: center; color: var(--dim); font-style: italic; }
-  .shots img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 500ms ease, transform 900ms cubic-bezier(.2,.7,.2,1); }
-  .shots img + img { opacity: 0; }
-  .shots.alt img + img { opacity: 1; }
-  @media (hover: hover) { .shots:hover img + img { opacity: 1; } .shots:hover img { transform: scale(1.02); } }
-  .shot-n { position: absolute; right: 10px; bottom: 10px; padding: 0.15rem 0.45rem; background: rgba(0,0,0,.55); color: var(--red); font: 400 0.8rem/1.2 var(--text); font-variant-numeric: tabular-nums; }
-  .shots img:only-of-type ~ .shot-n, .shots:not(:has(img)) .shot-n { display: none; }
+  /* photography case study: two photos per project, side by side */
+  .works { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 72px) clamp(20px, 3vw, 40px); }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 1vw, 14px); }
+  .pair img { width: 100%; aspect-ratio: var(--ar); object-fit: cover; display: block; background: var(--ph); }
+  .pair.single { grid-template-columns: 1fr; }
+  .pair.single img { aspect-ratio: 3 / 1; }  /* one photo matches the height of a 3:2 pair */
+  .works b { display: block; font: 400 1.6rem/1.1 var(--black-letter); margin: 0.9rem 0 0.3rem; }
+  .works .desc { margin: 0; font-size: calc(1rem + var(--plus)); }
+  .works .desc a { white-space: nowrap; }
   .photo-hero { position: relative; overflow: hidden; }
   .photo-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .missing {
@@ -460,6 +460,7 @@
   @media (max-width: 480px) {
     .role-row { font-size: calc(1.15rem + var(--plus)); }
     .games { grid-template-columns: 1fr; }
+    .works { grid-template-columns: 1fr; }
     .facts { grid-template-columns: 1fr; gap: 2rem; }
     .route { font-size: 1.1rem; }
     .about-toggle { font-size: 1.05rem; }
@@ -617,7 +618,7 @@
       </div>
     </li>
     <li class="role-item">
-      <button class="role-row" id="r-ics" aria-expanded="false" aria-controls="d-ics" data-peek="Independent Creative Services" data-peek-img="media/photo-bbng-1.jpg">
+      <button class="role-row" id="r-ics" aria-expanded="false" aria-controls="d-ics" data-peek="Independent Creative Services" data-peek-img="https://lh3.googleusercontent.com/d/1vN433ScmLHRxsfa3zdZFHiMbb_qp9Of4=w600">
         <span class="r">Photographer <i>@</i> <span class="nw"><b>Independent Creative Services</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2023–now</span>
       </button>
       <div class="detail-wrap" id="d-ics" role="region" aria-labelledby="r-ics" inert>
@@ -630,7 +631,7 @@
                 <p>Experience with bands and cultural events: <span class="w">TNT Energy Drink at São Paulo Fashion Week, BADBADNOTGOOD, DoWestFest</span> and <span class="w">Listening Room Toronto</span>.</p>
                 <p><a class="inline" href="https://www.instagram.com/lespin.jpg/" target="_blank" rel="noopener">@lespin.jpg ↗</a></p>
               </div>
-              <div class="ph media photo-hero"><img src="media/photo-bbng-1.jpg" alt="BADBADNOTGOOD live, photographed by Le Espindola" loading="lazy" onerror="this.remove()"></div>
+              <div class="ph media photo-hero"><img src="https://lh3.googleusercontent.com/d/1vN433ScmLHRxsfa3zdZFHiMbb_qp9Of4=w1800" alt="BADBADNOTGOOD live, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer"></div>
             </div>
             <div class="olympics">
               <div class="olympics-head">
@@ -638,37 +639,54 @@
                 <span class="rule" aria-hidden="true"></span>
                 <span>Case study</span>
               </div>
-              <ul class="games">
-                <li><button class="ph tile shots" type="button" aria-label="BADBADNOTGOOD: show the other photo" data-label="BADBADNOTGOOD">
-                  <img src="media/photo-bbng-1.jpg" alt="BADBADNOTGOOD on stage" loading="lazy" onerror="this.remove()">
-                  <img src="media/photo-bbng-2.jpg" alt="" loading="lazy" onerror="this.remove()">
-                  <span class="shot-n" aria-hidden="true">1 / 2</span>
-                </button><b>BADBADNOTGOOD</b><span>Live concert</span><small><a class="inline" href="https://www.instagram.com/lespin.jpg/p/DTxtkuHkSbk/" target="_blank" rel="noopener">See more ↗</a></small></li>
-                <li><button class="ph tile shots" type="button" aria-label="São Paulo Fashion Week: show the other photo" data-label="São Paulo Fashion Week">
-                  <img src="media/photo-spfw-1.jpg" alt="TNT Energy Drink at São Paulo Fashion Week" loading="lazy" onerror="this.remove()">
-                  <img src="media/photo-spfw-2.jpg" alt="" loading="lazy" onerror="this.remove()">
-                  <span class="shot-n" aria-hidden="true">1 / 2</span>
-                </button><b>São Paulo Fashion Week</b><span>TNT Energy Drink · 2016</span><small>&nbsp;</small></li>
-                <li><button class="ph tile shots" type="button" aria-label="DoWestFest: show the other photo" data-label="DoWestFest">
-                  <img src="media/photo-dowestfest-1.jpg" alt="DoWestFest" loading="lazy" onerror="this.remove()">
-                  <img src="media/photo-dowestfest-2.jpg" alt="" loading="lazy" onerror="this.remove()">
-                  <span class="shot-n" aria-hidden="true">1 / 2</span>
-                </button><b>DoWestFest</b><span>Festival</span><small><a class="inline" href="https://www.instagram.com/p/DKxPh-0vedD/" target="_blank" rel="noopener">See more ↗</a></small></li>
-                <li><button class="ph tile shots" type="button" aria-label="Listening Room: show the other photo" data-label="Listening Room">
-                  <img src="media/photo-listening-room-1.jpg" alt="Listening Room Toronto" loading="lazy" onerror="this.remove()">
-                  <img src="media/photo-listening-room-2.jpg" alt="" loading="lazy" onerror="this.remove()">
-                  <span class="shot-n" aria-hidden="true">1 / 2</span>
-                </button><b>Listening Room</b><span>Live music · Toronto</span><small><a class="inline" href="https://www.instagram.com/lespin.jpg/p/DTxtkuHkSbk/" target="_blank" rel="noopener">See more ↗</a></small></li>
-                <li><button class="ph tile shots" type="button" aria-label="SINA: show the other photo" data-label="SINA">
-                  <img src="media/photo-sina-1.jpg" alt="SINA press kit portrait" loading="lazy" onerror="this.remove()">
-                  <img src="media/photo-sina-2.jpg" alt="" loading="lazy" onerror="this.remove()">
-                  <span class="shot-n" aria-hidden="true">1 / 2</span>
-                </button><b>SINA</b><span>Press kit for an independent Canadian artist</span><small><a class="inline" href="https://www.instagram.com/p/DRsEdYVj4Jf/" target="_blank" rel="noopener">See more ↗</a></small></li>
-                <li><button class="ph tile shots" type="button" aria-label="SAUL: show the other photo" data-label="SAUL">
-                  <img src="media/photo-saul-1.jpg" alt="SAUL press kit portrait" loading="lazy" onerror="this.remove()">
-                  <img src="media/photo-saul-2.jpg" alt="" loading="lazy" onerror="this.remove()">
-                  <span class="shot-n" aria-hidden="true">1 / 2</span>
-                </button><b>SAUL</b><span>Press kit for an independent Canadian artist</span><small><a class="inline" href="https://www.instagram.com/p/DSXznQ7Edd1/" target="_blank" rel="noopener">See more ↗</a></small></li>
+              <ul class="works">
+                <li class="work">
+                  <div class="pair" style="--ar: 3 / 2">
+                    <img src="https://lh3.googleusercontent.com/d/1vN433ScmLHRxsfa3zdZFHiMbb_qp9Of4=w1400" alt="BADBADNOTGOOD live, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                    <img src="https://lh3.googleusercontent.com/d/1DKIlLsqLzRWM0EfNW9ImAb1myZz9xCWc=w1400" alt="BADBADNOTGOOD live, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <b>BADBADNOTGOOD</b>
+                  <p class="desc">Live concert photography. <a class="inline" href="https://www.instagram.com/lespin.jpg/p/DTxtkuHkSbk/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
+                </li>
+                <li class="work">
+                  <div class="pair single" style="--ar: 3 / 2">
+                    <img src="https://lh3.googleusercontent.com/d/1H600Uk9vrrCKPAnc00Sybr-4YNJJMnoz=w1400" alt="Listening Room Toronto, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <b>Listening Room</b>
+                  <p class="desc">Live music in Toronto. <a class="inline" href="https://www.instagram.com/lespin.jpg/p/DTxtkuHkSbk/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
+                </li>
+                <li class="work">
+                  <div class="pair" style="--ar: 1 / 1">
+                    <img src="https://lh3.googleusercontent.com/d/1vvPin0iKLR2-GREXjKiNnQ7H9l7MiFCm=w1400" alt="TNT Energy Drink at São Paulo Fashion Week" loading="lazy" referrerpolicy="no-referrer">
+                    <img src="https://lh3.googleusercontent.com/d/1NoH_f0jUSvf6BXaYpwMbyOAvJfzY87Wg=w1400" alt="TNT Energy Drink at São Paulo Fashion Week" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <b>São Paulo Fashion Week</b>
+                  <p class="desc">Event photography for TNT Energy Drink, 2016.</p>
+                </li>
+                <li class="work">
+                  <div class="pair" style="--ar: 1 / 1">
+                    <img src="https://lh3.googleusercontent.com/d/1ejJ5lUVqan6nBeZBl5v8VzPSltgOOnwX=w1400" alt="SAUL press kit, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                    <img src="https://lh3.googleusercontent.com/d/1MSSPEwCHWfvd4Eb3jfXJ5TQy7N1--EUP=w1400" alt="SAUL press kit, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <b>SAUL</b>
+                  <p class="desc">Press kit for an independent Canadian artist. <a class="inline" href="https://www.instagram.com/p/DSXznQ7Edd1/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
+                </li>
+                <li class="work">
+                  <div class="pair" style="--ar: 2 / 3">
+                    <img src="https://lh3.googleusercontent.com/d/1wGjwvz3ZtsCG67GQHl-VQk-axL7P_46s=w1400" alt="DoWestFest, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                    <img src="https://lh3.googleusercontent.com/d/15yNnniIJXKcZxa2id932RpXH5oy7-rLB=w1400" alt="DoWestFest, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <b>DoWestFest</b>
+                  <p class="desc">Festival coverage. <a class="inline" href="https://www.instagram.com/p/DKxPh-0vedD/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
+                </li>
+                <li class="work">
+                  <div class="pair" style="--ar: 2 / 3">
+                    <img src="https://lh3.googleusercontent.com/d/1K5oSwiWcyy6MtedD8p8S4jdV5s2GSOHE=w1400" alt="SINA press kit, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                    <img src="https://lh3.googleusercontent.com/d/1zF-q4UblssTDbaGLzOLUl0Tzl0KCVNp1=w1400" alt="SINA press kit, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  </div>
+                  <b>SINA</b>
+                  <p class="desc">Press kit for an independent Canadian artist. <a class="inline" href="https://www.instagram.com/p/DRsEdYVj4Jf/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
+                </li>
               </ul>
             </div>
           </div>
@@ -1116,11 +1134,6 @@
     show(0);
   });
 
-  // photo tiles: tap (or click) flips between the two photos of a project
-  document.querySelectorAll('.shots').forEach(t => t.addEventListener('click', () => {
-    t.classList.toggle('alt');
-    const n = t.querySelector('.shot-n'); if (n) n.textContent = (t.classList.contains('alt') ? 2 : 1) + ' / 2';
-  }));
 
   // small preview following the cursor (mouse only)
   const peek = document.getElementById('peek');
