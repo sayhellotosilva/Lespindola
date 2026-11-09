@@ -481,7 +481,8 @@
   .social a:hover { color: var(--white); }
   .social svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; }
   .foot-bar .copy { font-size: 1.1rem; font-family: "Schmaltzy Light", var(--black-letter); }
-  .foot-cv { font: 400 calc(1.125rem + var(--plus))/1.4 var(--text); text-decoration: none; }  /* same as the facts lists */
+  .foot-cv { font: 400 1.35rem/1 "Schmaltzy Light", var(--black-letter); text-decoration: none; }  /* same as Toronto / Europe */
+  .foot-cv .arr { font-family: var(--text); font-size: 0.8em; }  /* the fraktur has no ↗, so the arrow stays in the sans */
   .foot-cv:hover { color: var(--white); }
   .foot-route { width: min(300px, 70vw); }
   .foot-route .bl { font-family: "Schmaltzy Light", var(--black-letter); }
@@ -924,7 +925,7 @@
       <span class="rule both" aria-hidden="true"></span>
       <span class="bl">Europe</span>
     </div>
-    <a class="foot-cv" href="media/le-espindola-cv.pdf" download="Le-Espindola-CV.pdf" data-pending="true">Curriculum ↗</a>
+    <a class="foot-cv" href="media/le-espindola-cv.pdf" download="Le-Espindola-CV.pdf" data-pending="true">Curriculum <span class="arr">↗</span></a>
   </div>
 </footer>
 
