@@ -243,18 +243,17 @@
   .role-row:hover, .role-row[aria-expanded="true"] { color: var(--white); }
   .role-row:hover .y, .role-row[aria-expanded="true"] .y { opacity: 1; }
   .nw { white-space: nowrap; }
+  .chev svg { width: 0.55em; height: auto; display: block; }
   .chev {
     display: inline-block;
-    margin-left: 0.4em;
-    font-size: 0.7em;
+    margin-left: 0.45em;
+    line-height: 0;
     color: var(--red);
-    vertical-align: 0.12em;
+    vertical-align: 0.2em;
     transition: transform 450ms cubic-bezier(.2,.7,.2,1), color 200ms ease;
   }
   .role-row:hover .chev { color: var(--white); }
   .role-row[aria-expanded="true"] .chev { transform: rotate(180deg); color: var(--white); }
-  /* arrows only on touch screens; desktop has the hover preview */
-  @media (hover: hover) { .chev { display: none; } }
 
   /* Touch screens have no hover, so a soft light sweeps across each line
      as it passes the middle of the screen, hinting that it can be tapped */
@@ -287,7 +286,7 @@
   .detail-wrap.open { grid-template-rows: 1fr; }
   .detail { opacity: 0; transform: translateY(24px); transition: opacity 450ms ease, transform 700ms cubic-bezier(.2,.7,.2,1); }
   .detail-wrap.open .detail { opacity: 1; transform: none; transition-delay: 180ms; }
-  /* the automatic first open on phones unfolds more gently */
+  /* the automatic first open unfolds more gently */
   .detail-wrap.slow { transition: grid-template-rows 3200ms cubic-bezier(.4,0,.25,1); }
   .detail-wrap.slow .detail { transition: opacity 1300ms ease, transform 1800ms cubic-bezier(.3,.6,.2,1); }
   .detail-wrap.slow.open .detail { transition-delay: 700ms; }
@@ -507,7 +506,7 @@
   <ul class="roles">
     <li class="role-item">
       <button class="role-row" id="r-ad" aria-expanded="false" aria-controls="d-ad" data-peek="CBC" data-peek-img="media/cbc-associate-director.jpg">
-        <span class="r">Associate Director <i>@</i> <span class="nw"><b>CBC</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
+        <span class="r">Associate Director <i>@</i> <span class="nw"><b>CBC</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-ad" role="region" aria-labelledby="r-ad" inert>
         <div class="detail-clip">
@@ -555,7 +554,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-coord" aria-expanded="false" aria-controls="d-coord" data-peek="CBC Sports" data-peek-img="media/cbc-sports-control-room-v2.jpg">
-        <span class="r">Coordinator AD <i>@</i> <span class="nw"><b>CBC Sports</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
+        <span class="r">Coordinator AD <i>@</i> <span class="nw"><b>CBC Sports</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-coord" role="region" aria-labelledby="r-coord" inert>
         <div class="detail-clip">
@@ -577,7 +576,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-gfx" aria-expanded="false" aria-controls="d-gfx" data-peek="CBC graphics" data-peek-img="media/cbc-elections-graphics.jpg">
-        <span class="r">Senior Graphic Operator <i>@</i> <span class="nw"><b>CBC</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2019–2026</span>
+        <span class="r">Senior Graphic Operator <i>@</i> <span class="nw"><b>CBC</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2019–2026</span>
       </button>
       <div class="detail-wrap" id="d-gfx" role="region" aria-labelledby="r-gfx" inert>
         <div class="detail-clip">
@@ -608,7 +607,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-blackdoor" aria-expanded="false" aria-controls="d-blackdoor" data-peek="BlackDoor Films" data-peek-img="media/blackdoor-films-reel.jpg">
-        <span class="r">Filmmaker &amp; Producer <i>@</i> <span class="nw"><b>BlackDoor Films</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2018–2019</span>
+        <span class="r">Filmmaker &amp; Producer <i>@</i> <span class="nw"><b>BlackDoor Films</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2018–2019</span>
       </button>
       <div class="detail-wrap" id="d-blackdoor" role="region" aria-labelledby="r-blackdoor" inert>
         <div class="detail-clip">
@@ -642,8 +641,8 @@
       </div>
     </li>
     <li class="role-item">
-      <button class="role-row" id="r-startse" aria-expanded="false" aria-controls="d-startse" data-peek="StartSe">
-        <span class="r">Filmmaker | Content Producer <i>@</i> <span class="nw"><b>StartSe</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2017–2018</span>
+      <button class="role-row" id="r-startse" aria-expanded="false" aria-controls="d-startse" data-peek="StartSe" data-peek-img="https://i.ytimg.com/vi/Vv2DeJVhND4/mqdefault.jpg">
+        <span class="r">Filmmaker | Content Producer <i>@</i> <span class="nw"><b>StartSe</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2017–2018</span>
       </button>
       <div class="detail-wrap" id="d-startse" role="region" aria-labelledby="r-startse" inert>
         <div class="detail-clip">
@@ -671,7 +670,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-gazeta" aria-expanded="false" aria-controls="d-gazeta" data-peek="TV Gazeta">
-        <span class="r">Producer Assistant <i>@</i> <span class="nw"><b>TV Gazeta</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2017</span>
+        <span class="r">Producer Assistant <i>@</i> <span class="nw"><b>TV Gazeta</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2017</span>
       </button>
       <div class="detail-wrap" id="d-gazeta" role="region" aria-labelledby="r-gazeta" inert>
         <div class="detail-clip">
@@ -695,7 +694,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-record" aria-expanded="false" aria-controls="d-record" data-peek="Record TV">
-        <span class="r">Writer | Internship <i>@</i> <span class="nw"><b>Record TV</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2017</span>
+        <span class="r">Writer | Internship <i>@</i> <span class="nw"><b>Record TV</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2017</span>
       </button>
       <div class="detail-wrap" id="d-record" role="region" aria-labelledby="r-record" inert>
         <div class="detail-clip">
@@ -714,7 +713,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-photo" aria-expanded="false" aria-controls="d-photo" data-peek="Photography">
-        <span class="r">Photographer <i>@</i> <span class="nw"><b>Freelance</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2016–now</span>
+        <span class="r">Photographer <i>@</i> <span class="nw"><b>Freelance</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2016–now</span>
       </button>
       <div class="detail-wrap" id="d-photo" role="region" aria-labelledby="r-photo" inert>
         <div class="detail-clip">
@@ -736,8 +735,8 @@
       </div>
     </li>
     <li class="role-item">
-      <button class="role-row" id="r-av" aria-expanded="false" aria-controls="d-av" data-peek="Audiovisual">
-        <span class="r">Audiovisual <i>@</i> <span class="nw"><b>Freelance</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2015–2018</span>
+      <button class="role-row" id="r-av" aria-expanded="false" aria-controls="d-av" data-peek="Audiovisual" data-peek-img="https://i.ytimg.com/vi/wHZTAp3vjkI/mqdefault.jpg">
+        <span class="r">Audiovisual <i>@</i> <span class="nw"><b>Freelance</b><span class="chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span><span class="y">2015–2018</span>
       </button>
       <div class="detail-wrap" id="d-av" role="region" aria-labelledby="r-av" inert>
         <div class="detail-clip">
@@ -961,9 +960,9 @@
     });
   }
 
-  // Touch screens: when the first role scrolls up into the top 53% of the screen,
+  // Phones and desktop: when the first role scrolls up into the top 53% of the screen,
   // open it by itself after a short pause (once per visit) so it's clear the lines open
-  if (touchOnly && 'IntersectionObserver' in window) {
+  if ('IntersectionObserver' in window) {
     const first = rows[0];
     let done = false, timer = 0;
     const finish = () => { done = true; clearTimeout(timer); watcher.disconnect(); };
@@ -1067,15 +1066,10 @@
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     rows.forEach(row => {
       row.addEventListener('mouseenter', () => {
-        if (row.getAttribute('aria-expanded') === 'true') return;
-        if (row.dataset.peekImg) {
-          peek.style.backgroundImage = `url("${row.dataset.peekImg}")`;
-          peek.classList.add('has-img');
-        } else {
-          peek.style.backgroundImage = '';
-          peek.classList.remove('has-img');
-          peek.textContent = 'photo: ' + row.dataset.peek;
-        }
+        // only rows with a picture get a preview; no grey placeholder box
+        if (row.getAttribute('aria-expanded') === 'true' || !row.dataset.peekImg) return;
+        peek.style.backgroundImage = `url("${row.dataset.peekImg}")`;
+        peek.classList.add('has-img');
         peek.classList.add('on');
       });
       row.addEventListener('mousemove', e => { peek.style.left = e.clientX + 'px'; peek.style.top = e.clientY + 'px'; });
