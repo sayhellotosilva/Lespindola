@@ -481,6 +481,8 @@
   .social a:hover { color: var(--white); }
   .social svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; }
   .foot-bar .copy { font-size: 1.1rem; }
+  .foot-cv { font-size: 1.35rem; text-decoration: none; }
+  .foot-cv:hover { color: var(--white); }
   .foot-route { width: min(300px, 70vw); }
 
   /* ---------- Small screens ---------- */
@@ -547,7 +549,7 @@
           <p>Currently, I am an Associate Director and Senior Graphic Operator for live TV in Toronto, and <span class="w">looking to relocate to Spain in January 2027.</span></p>
           <p>Alongside my role, I freelance and volunteer as a <span class="w">Photographer, collaborating with independent businesses, bands and events</span> to create visuals and engaging social media content.</p>
           <p class="langs">* English &nbsp;* Spanish &nbsp;* Portuguese</p>
-          <a class="cv-link" id="cv-link" href="#" data-pending="true">Download CV</a>
+          <a class="cv-link" id="cv-link" href="media/le-espindola-cv.pdf" download="Le-Espindola-CV.pdf" data-pending="true">Download CV</a>
         </div>
       </div>
     </section>
@@ -921,6 +923,7 @@
       <span class="rule both" aria-hidden="true"></span>
       <span class="bl">Europe</span>
     </div>
+    <a class="foot-cv bl" href="media/le-espindola-cv.pdf" download="Le-Espindola-CV.pdf" data-pending="true">Curriculum</a>
   </div>
 </footer>
 
@@ -1005,8 +1008,8 @@
   });
 
   // Download CV: the PDF isn't in yet, so the link does nothing for now
-  const cv = document.getElementById('cv-link');
-  cv.addEventListener('click', e => { if (cv.dataset.pending) e.preventDefault(); });
+  // CV links download the PDF; while it isn't uploaded (data-pending) they do nothing
+  document.querySelectorAll('a[download][data-pending]').forEach(a => a.addEventListener('click', e => { if (a.dataset.pending) e.preventDefault(); }));
 
   // Experience list: a line opens its detail underneath; one open at a time
   function setOpen(row, open) {
