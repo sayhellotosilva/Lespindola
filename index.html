@@ -11,7 +11,7 @@
 <style>
   @font-face {
     font-family: "Schmaltzy";
-    src: url("fonts/schmaltzy-book.woff2") format("woff2");
+    src: url("fonts/schmaltzy-medium.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -169,6 +169,7 @@
     white-space: nowrap;
     text-align: center;
   }
+  .swsh { font-feature-settings: "swsh" 1; }  /* the font's swash L */
   .hero h1 .dot { font-family: var(--black-letter); font-size: 1em; vertical-align: 0; margin: 0 0.02em; }
   .hero-photo-wrap { display: flex; flex-direction: column; align-items: center; }
   .hero-tagline {
@@ -503,7 +504,7 @@
     <div class="hero-photo-wrap">
       <div class="photo-box">
         <img class="hero-photo" src="media/le-espindola-cover-v2.jpg" alt="Le Espindola, black and white portrait outdoors in a scarf and sunglasses" width="2000" height="1331" fetchpriority="high">
-        <h1>Le<span class="dot">•</span>Espindola</h1>
+        <h1 aria-label="Le Espindola"><span class="swsh">L</span>e<span class="dot">•</span>Espindola</h1>
       </div>
     </div>
   </div>
