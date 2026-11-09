@@ -399,6 +399,10 @@
   .sq-bar .reel-nav button:disabled { opacity: 0.3; cursor: default; }
   .sq-bar .reel-nav button:disabled:hover { color: var(--red); transform: none; }
   .sq-count { opacity: 0.7; font-size: 0.9em; }
+  /* square video cards (Past experiences): YouTube loads only when played */
+  .vsq { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--ph); }
+  .vsq .yt-play img { opacity: 0.9; }
+  .vsq iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
   .works b { display: block; font: 400 1.6rem/1.1 var(--black-letter); margin: 0.9rem 0 0.3rem; }
   .works .desc { margin: 0; font-size: calc(1rem + var(--plus)); }
   .works .desc a { white-space: nowrap; }
@@ -859,22 +863,41 @@
               <div class="detail-text">
                 <h3>Past experiences</h3>
                 <p>Alongside studying and my first TV jobs, I made things on my own: a YouTube channel, short films, commercials and radio content.</p>
-                <ul class="credits">
-                  <li><b>Música Pra Quem?</b><span>2016–2018 · Co-founder, producer, host &amp; editor of a YouTube channel on the Brazilian independent music scene. Best Experimental Radio, TV and Internet Project 2017, Cásper Líbero. <a class="inline" href="https://www.youtube.com/@musicapraquem" target="_blank" rel="noopener">Channel ↗</a></span></li>
-                  <li><b>Jogo da Meia Noite</b><span>2016 · Production, casting &amp; sound capture for the short film.</span></li>
-                  <li><b>Vem Comigo: Reciclagem</b><span>2015 · Videographer &amp; host, TV Gazeta, aired on open TV</span></li>
-                  <li><b>Punto Com</b><span>2015 · General producer of the video commercial, voiceover of the radio spot. Best Direction &amp; Best Audiovisual Producer, Cásper Líbero</span></li>
-                  <li><b>2G conteúdo</b><span>2015 · Writing, voiceover, editing &amp; production of radio and internet content</span></li>
-                </ul>
               </div>
-              <div class="reel media" data-reel>
-                <div class="reel-stage">
-                  <div class="slide yt" data-yt="wHZTAp3vjkI" data-title="Música Pra Quem? · Far From Alaska interview"><button class="yt-play" type="button" aria-label="Play: Música Pra Quem? · Far From Alaska interview"><img src="https://i.ytimg.com/vi/wHZTAp3vjkI/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/wHZTAp3vjkI/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
-                  <div class="slide yt" data-yt="Cynlaqkd0Zs" data-title="Jogo da Meia Noite · short film"><button class="yt-play" type="button" aria-label="Play: Jogo da Meia Noite · short film"><img src="https://i.ytimg.com/vi/Cynlaqkd0Zs/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/Cynlaqkd0Zs/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
-                  <div class="slide yt" data-yt="6wZJ9p__CLY" data-title="Punto Com · commercial, general producer"><button class="yt-play" type="button" aria-label="Play: Punto Com · commercial, general producer"><img src="https://i.ytimg.com/vi/6wZJ9p__CLY/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/6wZJ9p__CLY/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
-                </div>
-                <div class="reel-bar"><span class="reel-title"></span><span class="reel-nav"><button class="reel-prev" type="button" aria-label="Previous video">←</button><span class="reel-count"></span><button class="reel-next" type="button" aria-label="Next video">→</button></span></div>
+            </div>
+            <div class="olympics">
+              <div class="olympics-head">
+                <h4>Selected work</h4>
+                <span class="rule" aria-hidden="true"></span>
+                <span>Case study</span>
               </div>
+              <ul class="works">
+                <li class="work">
+                  <div class="vsq" data-yt="wHZTAp3vjkI" data-title="Música Pra Quem?"><button class="yt-play" type="button" aria-label="Play: Música Pra Quem?"><img src="https://i.ytimg.com/vi/wHZTAp3vjkI/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="sq-bar"><b>Música Pra Quem?</b></div>
+                  <p class="desc">2016–2018 · Co-founder, producer, host &amp; editor of a YouTube channel on the Brazilian independent music scene. Best Experimental Radio, TV and Internet Project 2017, Cásper Líbero. <a class="inline" href="https://www.youtube.com/@musicapraquem" target="_blank" rel="noopener">See the channel ↗</a></p>
+                </li>
+                <li class="work">
+                  <div class="vsq" data-yt="Cynlaqkd0Zs" data-title="Jogo da Meia Noite"><button class="yt-play" type="button" aria-label="Play: Jogo da Meia Noite"><img src="https://i.ytimg.com/vi/Cynlaqkd0Zs/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="sq-bar"><b>Jogo da Meia Noite</b></div>
+                  <p class="desc">2016 · Production, casting &amp; sound capture for the short film.</p>
+                </li>
+                <li class="work">
+                  <div class="vsq" data-yt="6wZJ9p__CLY" data-title="Punto Com"><button class="yt-play" type="button" aria-label="Play: Punto Com"><img src="https://i.ytimg.com/vi/6wZJ9p__CLY/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="sq-bar"><b>Punto Com</b></div>
+                  <p class="desc">2015 · General producer of the video commercial and voiceover of the radio spot. Best Direction &amp; Best Audiovisual Producer, Cásper Líbero.</p>
+                </li>
+                <li class="work">
+                  <div class="vsq" data-yt="a5mKBsrrmGg" data-title="Vem Comigo"><button class="yt-play" type="button" aria-label="Play: Vem Comigo"><img src="https://i.ytimg.com/vi/a5mKBsrrmGg/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 10 12" width="18" height="22"><path d="M0 0L10 6L0 12Z" fill="currentColor"/></svg></span></button></div>
+                  <div class="sq-bar"><b>Vem Comigo</b></div>
+                  <p class="desc">2015 · Videographer &amp; host on TV Gazeta's Vem Comigo, an episode on recycling aired on open TV.</p>
+                </li>
+                <li class="work">
+                  <div class="vsq ph" aria-hidden="true"></div>
+                  <div class="sq-bar"><b>2G conteúdo</b></div>
+                  <p class="desc">2015 · Writing, voiceover, editing &amp; production of radio and internet content.</p>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -1206,6 +1229,23 @@
       io.observe(sq);
     }
   });
+
+  // square video cards: swap the thumbnail for the YouTube player on click
+  document.querySelectorAll('.vsq[data-yt]').forEach(card => card.querySelector('.yt-play').addEventListener('click', () => {
+    document.querySelectorAll('.vsq iframe').forEach(f => { f.parentElement.querySelector('.yt-play').hidden = false; f.remove(); });
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + card.dataset.yt + '?autoplay=1&rel=0&playsinline=1&modestbranding=1';
+    f.title = card.dataset.title || 'Video';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    card.querySelector('.yt-play').hidden = true;
+    card.appendChild(f);
+  }));
+  // stop any square-card video when its section closes
+  document.querySelectorAll('.detail-wrap').forEach(w => { if (w.querySelector('.vsq')) new MutationObserver(() => {
+    if (w.classList.contains('open')) return;
+    w.querySelectorAll('.vsq iframe').forEach(f => { f.parentElement.querySelector('.yt-play').hidden = false; f.remove(); });
+  }).observe(w, { attributes: true, attributeFilter: ['class'] }); });
 
   // small preview following the cursor (mouse only)
   const peek = document.getElementById('peek');
