@@ -361,15 +361,28 @@
   .reel-count { opacity: 0.7; }
   .reel-nav button { border: 0; background: none; padding: 0.2rem 0.35rem; color: var(--red); font: 400 1.35rem/1 var(--text); cursor: pointer; transition: color 150ms ease, transform 150ms ease; }
   .reel-nav button:hover { color: var(--white); }
+  .sq-next:hover { transform: translateX(3px); }
+  .sq-prev:hover { transform: translateX(-3px); }
   .reel-next:hover { transform: translateX(3px); }
   .reel-prev:hover { transform: translateX(-3px); }
   .reel.single .reel-nav { display: none; }
   /* photography case study: two photos per project, side by side */
   .works { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 72px) clamp(20px, 3vw, 40px); }
-  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 1vw, 14px); }
-  .pair img { width: 100%; aspect-ratio: var(--ar); object-fit: cover; display: block; background: var(--ph); }
-  .pair.single { grid-template-columns: 1fr; }
-  .pair.single img { aspect-ratio: 3 / 1; }  /* one photo matches the height of a 3:2 pair */
+  /* one square photo per project; the next photo peeks in at the right edge */
+  .sq { --peek: clamp(28px, 3.5vw, 44px); --gap: 8px; overflow: hidden; }
+  .sq-track { display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; padding-right: calc(var(--peek) + var(--gap)); }
+  .sq-track::-webkit-scrollbar { display: none; }
+  .sq-track:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+  .sq-track img { flex: 0 0 calc(100% - var(--peek)); aspect-ratio: 1; object-fit: cover; display: block; background: var(--ph); scroll-snap-align: start; user-select: none; }
+  .sq-track img:not(.on) { opacity: 0.55; transition: opacity 400ms ease; }
+  .sq-track img.on { opacity: 1; transition: opacity 400ms ease; }
+  @keyframes nudge { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(calc(-1 * var(--peek) * 1.4)); } }
+  .sq.nudge .sq-track > img { animation: nudge 1300ms cubic-bezier(.45,.05,.35,1); }
+  .sq-bar { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin: 0.9rem 0 0.3rem; }
+  .sq-bar b { margin: 0 !important; }
+  .sq-bar .reel-nav button:disabled { opacity: 0.3; cursor: default; }
+  .sq-bar .reel-nav button:disabled:hover { color: var(--red); transform: none; }
+  .sq-count { opacity: 0.7; font-size: 0.9em; }
   .works b { display: block; font: 400 1.6rem/1.1 var(--black-letter); margin: 0.9rem 0 0.3rem; }
   .works .desc { margin: 0; font-size: calc(1rem + var(--plus)); }
   .works .desc a { white-space: nowrap; }
@@ -466,6 +479,7 @@
     .about-toggle { font-size: 1.05rem; }
   }
   @media (prefers-reduced-motion: reduce) {
+    .sq.nudge .sq-track > img { animation: none !important; }
     .about-wrap, .detail-wrap, .peek, .about-wrap .about, .detail, .at-word, .at-x i, .chev { transition: none !important; }
   }
 </style>
@@ -640,50 +654,63 @@
               </div>
               <ul class="works">
                 <li class="work">
-                  <div class="pair" style="--ar: 3 / 2">
-                    <img src="https://lh3.googleusercontent.com/d/1vN433ScmLHRxsfa3zdZFHiMbb_qp9Of4=w1400" alt="BADBADNOTGOOD live, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
-                    <img src="https://lh3.googleusercontent.com/d/1DKIlLsqLzRWM0EfNW9ImAb1myZz9xCWc=w1400" alt="BADBADNOTGOOD live, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  <div class="sq" data-sq>
+                    <div class="sq-track" tabindex="0" aria-label="BADBADNOTGOOD photos">
+                      <img src="https://lh3.googleusercontent.com/d/1vN433ScmLHRxsfa3zdZFHiMbb_qp9Of4=w1400" alt="BADBADNOTGOOD live, photographed by Le Espindola (1 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                      <img src="https://lh3.googleusercontent.com/d/1DKIlLsqLzRWM0EfNW9ImAb1myZz9xCWc=w1400" alt="BADBADNOTGOOD live, photographed by Le Espindola (2 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                    </div>
                   </div>
-                  <b>BADBADNOTGOOD</b>
+                  <div class="sq-bar"><b>BADBADNOTGOOD</b><span class="reel-nav"><button class="sq-prev" type="button" aria-label="Previous photo">←</button><span class="sq-count">1 / 2</span><button class="sq-next" type="button" aria-label="Next photo">→</button></span></div>
                   <p class="desc">Live concert photography. <a class="inline" href="https://www.instagram.com/lespin.jpg/p/DTxtkuHkSbk/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
                 </li>
                 <li class="work">
-                  <div class="pair single" style="--ar: 3 / 2">
-                    <img src="https://lh3.googleusercontent.com/d/1H600Uk9vrrCKPAnc00Sybr-4YNJJMnoz=w1400" alt="Listening Room Toronto, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  <div class="sq" data-sq>
+                    <div class="sq-track" tabindex="0" aria-label="Listening Room photos">
+                      <img src="https://lh3.googleusercontent.com/d/1H600Uk9vrrCKPAnc00Sybr-4YNJJMnoz=w1400" alt="Listening Room Toronto, photographed by Le Espindola (1 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                      <img src="https://lh3.googleusercontent.com/d/1zR0RMoSR1yUOtZ0WcAnApq84uU4X2Q7q=w1400" alt="Listening Room Toronto, photographed by Le Espindola (2 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                    </div>
                   </div>
-                  <b>Listening Room</b>
+                  <div class="sq-bar"><b>Listening Room</b><span class="reel-nav"><button class="sq-prev" type="button" aria-label="Previous photo">←</button><span class="sq-count">1 / 2</span><button class="sq-next" type="button" aria-label="Next photo">→</button></span></div>
                   <p class="desc">Live music in Toronto. <a class="inline" href="https://www.instagram.com/lespin.jpg/p/DTxtkuHkSbk/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
                 </li>
                 <li class="work">
-                  <div class="pair" style="--ar: 1 / 1">
-                    <img src="https://lh3.googleusercontent.com/d/1vvPin0iKLR2-GREXjKiNnQ7H9l7MiFCm=w1400" alt="TNT Energy Drink at São Paulo Fashion Week" loading="lazy" referrerpolicy="no-referrer">
-                    <img src="https://lh3.googleusercontent.com/d/1NoH_f0jUSvf6BXaYpwMbyOAvJfzY87Wg=w1400" alt="TNT Energy Drink at São Paulo Fashion Week" loading="lazy" referrerpolicy="no-referrer">
+                  <div class="sq" data-sq>
+                    <div class="sq-track" tabindex="0" aria-label="São Paulo Fashion Week photos">
+                      <img src="https://lh3.googleusercontent.com/d/1vvPin0iKLR2-GREXjKiNnQ7H9l7MiFCm=w1400" alt="TNT Energy Drink at São Paulo Fashion Week (1 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                      <img src="https://lh3.googleusercontent.com/d/1NoH_f0jUSvf6BXaYpwMbyOAvJfzY87Wg=w1400" alt="TNT Energy Drink at São Paulo Fashion Week (2 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                    </div>
                   </div>
-                  <b>São Paulo Fashion Week</b>
+                  <div class="sq-bar"><b>São Paulo Fashion Week</b><span class="reel-nav"><button class="sq-prev" type="button" aria-label="Previous photo">←</button><span class="sq-count">1 / 2</span><button class="sq-next" type="button" aria-label="Next photo">→</button></span></div>
                   <p class="desc">Event photography for TNT Energy Drink, 2016.</p>
                 </li>
                 <li class="work">
-                  <div class="pair" style="--ar: 1 / 1">
-                    <img src="https://lh3.googleusercontent.com/d/1ejJ5lUVqan6nBeZBl5v8VzPSltgOOnwX=w1400" alt="SAUL press kit, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
-                    <img src="https://lh3.googleusercontent.com/d/1MSSPEwCHWfvd4Eb3jfXJ5TQy7N1--EUP=w1400" alt="SAUL press kit, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  <div class="sq" data-sq>
+                    <div class="sq-track" tabindex="0" aria-label="SAUL photos">
+                      <img src="https://lh3.googleusercontent.com/d/1PW84pLl0Y-oseWbHpenYpyHeB3WNWIcw=w1400" alt="SAUL press kit, photographed by Le Espindola (1 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                      <img src="https://lh3.googleusercontent.com/d/1MSSPEwCHWfvd4Eb3jfXJ5TQy7N1--EUP=w1400" alt="SAUL press kit, photographed by Le Espindola (2 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                    </div>
                   </div>
-                  <b>SAUL</b>
+                  <div class="sq-bar"><b>SAUL</b><span class="reel-nav"><button class="sq-prev" type="button" aria-label="Previous photo">←</button><span class="sq-count">1 / 2</span><button class="sq-next" type="button" aria-label="Next photo">→</button></span></div>
                   <p class="desc">Press kit for an independent Canadian artist. <a class="inline" href="https://www.instagram.com/p/DSXznQ7Edd1/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
                 </li>
                 <li class="work">
-                  <div class="pair" style="--ar: 2 / 3">
-                    <img src="https://lh3.googleusercontent.com/d/1wGjwvz3ZtsCG67GQHl-VQk-axL7P_46s=w1400" alt="DoWestFest, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
-                    <img src="https://lh3.googleusercontent.com/d/15yNnniIJXKcZxa2id932RpXH5oy7-rLB=w1400" alt="DoWestFest, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  <div class="sq" data-sq>
+                    <div class="sq-track" tabindex="0" aria-label="DoWestFest photos">
+                      <img src="https://lh3.googleusercontent.com/d/1TgfnQxfUb8CIlO1O6LGpaYYrZALF7AxW=w1400" alt="DoWestFest, photographed by Le Espindola (1 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                      <img src="https://lh3.googleusercontent.com/d/1mRDigEXsmaL-d-SleqC9pwNrC3GnSDLs=w1400" alt="DoWestFest, photographed by Le Espindola (2 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                    </div>
                   </div>
-                  <b>DoWestFest</b>
+                  <div class="sq-bar"><b>DoWestFest</b><span class="reel-nav"><button class="sq-prev" type="button" aria-label="Previous photo">←</button><span class="sq-count">1 / 2</span><button class="sq-next" type="button" aria-label="Next photo">→</button></span></div>
                   <p class="desc">Festival coverage. <a class="inline" href="https://www.instagram.com/p/DKxPh-0vedD/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
                 </li>
                 <li class="work">
-                  <div class="pair" style="--ar: 2 / 3">
-                    <img src="https://lh3.googleusercontent.com/d/1K5oSwiWcyy6MtedD8p8S4jdV5s2GSOHE=w1400" alt="SINA press kit, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
-                    <img src="https://lh3.googleusercontent.com/d/1zF-q4UblssTDbaGLzOLUl0Tzl0KCVNp1=w1400" alt="SINA press kit, photographed by Le Espindola" loading="lazy" referrerpolicy="no-referrer">
+                  <div class="sq" data-sq>
+                    <div class="sq-track" tabindex="0" aria-label="SINA photos">
+                      <img src="https://lh3.googleusercontent.com/d/1K5oSwiWcyy6MtedD8p8S4jdV5s2GSOHE=w1400" alt="SINA press kit, photographed by Le Espindola (1 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                      <img src="https://lh3.googleusercontent.com/d/1zF-q4UblssTDbaGLzOLUl0Tzl0KCVNp1=w1400" alt="SINA press kit, photographed by Le Espindola (2 of 2)" loading="lazy" referrerpolicy="no-referrer" draggable="false">
+                    </div>
                   </div>
-                  <b>SINA</b>
+                  <div class="sq-bar"><b>SINA</b><span class="reel-nav"><button class="sq-prev" type="button" aria-label="Previous photo">←</button><span class="sq-count">1 / 2</span><button class="sq-next" type="button" aria-label="Next photo">→</button></span></div>
                   <p class="desc">Press kit for an independent Canadian artist. <a class="inline" href="https://www.instagram.com/p/DRsEdYVj4Jf/" target="_blank" rel="noopener">See more on Instagram ↗</a></p>
                 </li>
               </ul>
@@ -1133,6 +1160,36 @@
     show(0);
   });
 
+
+  // photo carousels: arrows step one photo; counter follows swipes; one nudge when first seen
+  document.querySelectorAll('[data-sq]').forEach((sq, n) => {
+    const track = sq.querySelector('.sq-track');
+    const imgs = [...track.querySelectorAll('img')];
+    const li = sq.closest('.work');
+    const count = li.querySelector('.sq-count'), prev = li.querySelector('.sq-prev'), next = li.querySelector('.sq-next');
+    const step = () => imgs[0].getBoundingClientRect().width + 8;
+    let i = 0;
+    const update = () => {
+      i = Math.max(0, Math.min(imgs.length - 1, Math.round(track.scrollLeft / step())));
+      imgs.forEach((im, k) => im.classList.toggle('on', k === i));
+      count.textContent = (i + 1) + ' / ' + imgs.length;
+      prev.disabled = i === 0; next.disabled = i === imgs.length - 1;
+    };
+    const go = k => track.scrollTo({ left: k * step(), behavior: reduce ? 'auto' : 'smooth' });
+    prev.addEventListener('click', () => go(i - 1));
+    next.addEventListener('click', () => go(i + 1));
+    track.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); go(i + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(i - 1); } });
+    let t = 0; track.addEventListener('scroll', () => { cancelAnimationFrame(t); t = requestAnimationFrame(update); }, { passive: true });
+    update();
+    if (!reduce && 'IntersectionObserver' in window && imgs.length > 1) {
+      const io = new IntersectionObserver(([en]) => {
+        if (!en.isIntersecting || i !== 0) return;
+        io.disconnect();
+        setTimeout(() => { sq.classList.add('nudge'); setTimeout(() => sq.classList.remove('nudge'), 1400); }, 300 + (n % 2) * 250);
+      }, { threshold: 0.6 });
+      io.observe(sq);
+    }
+  });
 
   // small preview following the cursor (mouse only)
   const peek = document.getElementById('peek');
