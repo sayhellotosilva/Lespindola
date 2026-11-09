@@ -331,6 +331,17 @@
     cursor: pointer;
   }
   .snd:hover, .snd[aria-pressed="true"] { color: var(--white); }
+  .credits { list-style: none; margin: 1.6rem 0 0; padding: 0; }
+  .credits li { margin: 0 0 1rem; }
+  .credits b { display: block; font-weight: 500; color: var(--white); }
+  .credits span { display: block; opacity: 0.7; font-size: 0.9em; }
+  a.inline { color: var(--red); text-decoration: none; }
+  a.inline:hover { color: var(--white); }
+  .yt { position: relative; display: block; overflow: hidden; background: var(--ph); aspect-ratio: 16 / 9; height: auto; min-height: 0; align-self: start; }
+  .yt img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 400ms ease; }
+  .yt:hover img { transform: scale(1.03); }
+  .yt-label { position: absolute; left: 10px; bottom: 10px; padding: 0.3rem 0.6rem; background: rgba(0,0,0,.6); color: var(--red); font: 400 0.85rem/1 var(--text); }
+  .yt:hover .yt-label { color: var(--white); }
   .missing {
     border: 1px dashed var(--dim);
     color: var(--dim);
@@ -481,9 +492,10 @@
             <div class="detail-grid">
               <div class="detail-text">
                 <h3>Live News &amp; Sports | Associate Director</h3>
-                <p>I keep live broadcasts running smoothly! From calling graphics, CGs, clips, VO/SOTs and commercial breaks in real time to catching last-minute errors before they hit air. I also manage music licensing and work closely with creative, editorial and technical teams to keep everything sharp, accurate and on time.</p>
-                <p>On the sports side, I package and time out shows and live events, write detailed notes for commentators, and help turn complex productions into seamless broadcasts.</p>
-                <p>* Delivered live coverage across <span class="w">3 Olympic Games: Beijing 2022, Paris 2024</span> &amp; <span class="w">Milano-Cortina 2026.</span></p>
+                <p>I call every element into live news programmes (graphics, name keys, banners, voice-overs, clips) and run commercial breaks in real time, across <span class="w">20+ hours of live shows a week</span>.</p>
+                <p>I package and time out shows and live events to fit their broadcast windows, from pre-production with producers and editors through to delivery. I'm the QC checkpoint between creative, technical and editorial teams, fixing editing, graphics and timing before and during air, and I write segment notes for commentators.</p>
+                <p>I also manage music licensing and clearance for live and sports programmes, and build show lineups, commercial formats and sponsorship integrations.</p>
+                <p>* Edit Suite AD for <span class="w">Beijing 2022</span> &amp; <span class="w">Paris 2024</span>, and Control Room AD for <span class="w">Milano-Cortina 2026</span>: over 6 hours live every day, reaching 30.5 million viewers in Canada.</p>
               </div>
               <div class="vid media">
                 <video src="media/cbc-associate-director.mp4" poster="media/cbc-associate-director.jpg" muted loop playsinline preload="none" aria-label="Le working as Associate Director in the CBC control room"></video>
@@ -544,7 +556,7 @@
               <div class="detail-text">
                 <h3>Senior Graphic Operator</h3>
                 <p>I create and operate live TV graphics using <span class="w">Viz Trio and Viz Artist</span>, collaborating with producers, video editors and ADs to bring broadcasts to life in real time.</p>
-                <p>In this role, I've worked on major national and international productions including Canadian &amp; U.S. elections, Royal events, the Giller Prize, and Family Feud Canada.</p>
+                <p>In this role, I've worked on major national and international productions including Canadian &amp; U.S. elections, the Eurovision contest, Royal events, CBC Sports live shows, the Commonwealth Games, the Giller Prize and Family Feud Canada.</p>
               </div>
               <div class="vid media">
                 <video src="media/cbc-elections-graphics.mp4" poster="media/cbc-elections-graphics.jpg" muted loop playsinline preload="none" aria-label="CBC News live election graphics"></video>
@@ -557,7 +569,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-startse" aria-expanded="false" aria-controls="d-startse" data-peek="StartSe">
-        <span class="r">Filmmaker | Content Producer <i>@</i> <span class="nw"><b>StartSe</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">years</span>
+        <span class="r">Filmmaker | Content Producer <i>@</i> <span class="nw"><b>StartSe</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2017–2018</span>
       </button>
       <div class="detail-wrap" id="d-startse" role="region" aria-labelledby="r-startse" inert>
         <div class="detail-clip">
@@ -565,8 +577,14 @@
             <div class="detail-grid">
               <div class="detail-text">
                 <h3>Filmmaker | Content Producer</h3>
-                <p>Produced and delivered video and photo content for online courses, events, and campaigns for a leading startup media platform, acting as producer, on-camera host, camera operator, and video editor.</p>
-                <p>Coordinated cross-platform content creation across YouTube, Instagram, and LinkedIn, and managed event video/audio assets and campaign rollouts.</p>
+                <p>Produced video and photo content for online courses, events and campaigns, working as producer, on-camera host, camera operator and editor.</p>
+                <p>Coordinated content strategy across YouTube, Instagram and LinkedIn, managed event video assets and campaign rollouts, and operated live streams for events.</p>
+                <p>Set up the company's audiovisual area and led the team delivering <span class="w">StartSe TV</span>, a new channel project.</p>
+                <ul class="credits">
+                  <li><b>Startup da Semana: Yubb</b><span>Hosting &amp; editing</span></li>
+                  <li><b>LawTech Conference 2018</b><span>Video editing</span></li>
+                  <li><b>Entenda o ecossistema de startups com Rei Leão</b><span>Shooting &amp; editing</span></li>
+                </ul>
               </div>
               <div class="ph media">video / photo</div>
             </div>
@@ -576,7 +594,7 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-blackdoor" aria-expanded="false" aria-controls="d-blackdoor" data-peek="BlackDoor Films" data-peek-img="media/blackdoor-films-reel.jpg">
-        <span class="r">Filmmaker &amp; Producer <i>@</i> <span class="nw"><b>BlackDoor Films</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">years</span>
+        <span class="r">Filmmaker &amp; Producer <i>@</i> <span class="nw"><b>BlackDoor Films</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2018–2019</span>
       </button>
       <div class="detail-wrap" id="d-blackdoor" role="region" aria-labelledby="r-blackdoor" inert>
         <div class="detail-clip">
@@ -584,9 +602,14 @@
             <div class="detail-grid">
               <div class="detail-text">
                 <h3>Filmmaker &amp; Producer</h3>
-                <p>Produced, shot, and edited multi-camera video content for TV and YouTube, including advertising campaigns, institutional videos, and interview series for major Latin American brands.</p>
-                <p class="w">Managed end-to-end production workflows from pre-production planning through final asset delivery.</p>
-                <p>Worked closely with clients and post-production teams to create on-screen graphics ensuring visual consistency with each client's brand identity.</p>
+                <p>Produced, shot and edited multi-camera content for TV and YouTube: advertising campaigns, institutional videos and interview series. Clients included <span class="w">Propmark</span> (a weekly online programme), <span class="w">Decolar &amp; Despegar.com</span> (the biggest online travel company in Latin America) and Go Ahead Consulting &amp; Training.</p>
+                <p>Managed workflows from pre-production planning through final delivery, and designed on-screen graphics consistent with each client's brand identity.</p>
+                <p>Handled production logistics: crew, shoot scheduling, equipment, daily shooting and editing.</p>
+                <ul class="credits">
+                  <li><b>Propmark: Três passos para a produção de um vídeo eficaz</b><span>Production</span></li>
+                  <li><b>Achilles International Brazil</b><span>Camera &amp; sound, documentary</span></li>
+                  <li><b>Decolar.com Black Friday</b><span>Video production &amp; photo assistant</span></li>
+                </ul>
               </div>
               <div class="vid media">
                 <video src="media/blackdoor-films-reel.mp4" poster="media/blackdoor-films-reel.jpg" muted loop playsinline preload="none" aria-label="BlackDoor Films reel"></video>
@@ -599,15 +622,16 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-record" aria-expanded="false" aria-controls="d-record" data-peek="Record TV">
-        <span class="r">Writer | Internship <i>@</i> <span class="nw"><b>Record TV</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">years</span>
+        <span class="r">Writer | Internship <i>@</i> <span class="nw"><b>Record TV</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2017</span>
       </button>
       <div class="detail-wrap" id="d-record" role="region" aria-labelledby="r-record" inert>
         <div class="detail-clip">
           <div class="detail">
             <div class="detail-grid">
               <div class="detail-text">
-                <h3>Writer | Internship</h3>
-                <p class="missing">Description to add. The deck only has placeholder text for this role.</p>
+                <h3>Screenwriting | Internship</h3>
+                <p>Screenwriting internship on <span class="w">Sabrina Sato's programme</span>, one of Record TV's prime-time entertainment shows.</p>
+                <p>Pitched new ideas for the show and handled research, files and scripts for both external shoots and studio recordings.</p>
               </div>
               <div class="ph media">photo / gif</div>
             </div>
@@ -617,15 +641,21 @@
     </li>
     <li class="role-item">
       <button class="role-row" id="r-gazeta" aria-expanded="false" aria-controls="d-gazeta" data-peek="TV Gazeta">
-        <span class="r">Producer | Internship <i>@</i> <span class="nw"><b>TV Gazeta</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">years</span>
+        <span class="r">Producer Assistant <i>@</i> <span class="nw"><b>TV Gazeta</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2017</span>
       </button>
       <div class="detail-wrap" id="d-gazeta" role="region" aria-labelledby="r-gazeta" inert>
         <div class="detail-clip">
           <div class="detail">
             <div class="detail-grid">
               <div class="detail-text">
-                <h3>Producer | Internship</h3>
-                <p class="missing">Description to add. The deck only has placeholder text for this role.</p>
+                <h3>Producer Assistant</h3>
+                <p>Back-timed studio and external shows, built production and duplication schedules for on-time delivery, and planned studio and location shoots from start to finish.</p>
+                <p>Handled licensing for music and footage, image releases and distribution contracts, and coordinated schedules for live sales shows.</p>
+                <p>Before that, interned on presentation for the sales programme <span class="w">Gazeta Shopping</span> and on production in the Advanced Team at TV Gazeta's Creative Center.</p>
+                <ul class="credits">
+                  <li><b>São Paulo Verde</b><span>6-episode series on green initiatives</span></li>
+                  <li><b>Centro SP: Região da Sé</b><span>Production</span></li>
+                </ul>
               </div>
               <div class="ph media">photo / gif</div>
             </div>
@@ -634,23 +664,51 @@
       </div>
     </li>
     <li class="role-item">
-      <button class="role-row" id="r-freelance" aria-expanded="false" aria-controls="d-freelance" data-peek="Freelance">
-        <span class="r">Photographer <i>@</i> <span class="nw"><b>Freelance</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">alongside</span>
+      <button class="role-row" id="r-photo" aria-expanded="false" aria-controls="d-photo" data-peek="Photography">
+        <span class="r">Photographer <i>@</i> <span class="nw"><b>Freelance</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2016–now</span>
       </button>
-      <div class="detail-wrap" id="d-freelance" role="region" aria-labelledby="r-freelance" inert>
+      <div class="detail-wrap" id="d-photo" role="region" aria-labelledby="r-photo" inert>
         <div class="detail-clip">
           <div class="detail">
             <div class="detail-grid">
               <div class="detail-text">
                 <h3>Photographer</h3>
-                <p>I've photographed big bands and events like: <span class="w">BADBADNOTGOOD, São Paulo Fashion Week 2016</span>, …</p>
-                <p class="missing">Short description and the rest of the band list to add.</p>
+                <p>I shoot live events, festivals and concerts, with street photography as an ongoing practice. I've photographed bands and events like <span class="w">BADBADNOTGOOD, DoWestFest, Listening Room Toronto</span> and <span class="w">São Paulo Fashion Week 2016</span>, where I shot for TNT Energy Drink.</p>
+                <p>Under <a class="inline" href="https://www.instagram.com/lespin.jpg/" target="_blank" rel="noopener">@lespin.jpg</a> I also deliver brand identity, photography and social media visuals for small businesses, independent artists and events, like Marte Pottery Studio.</p>
               </div>
               <div class="media strip">
                 <div class="ph">band</div>
-                <div class="ph">event</div>
-                <div class="ph">travel</div>
+                <div class="ph">SPFW</div>
+                <div class="ph">street</div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="role-item">
+      <button class="role-row" id="r-av" aria-expanded="false" aria-controls="d-av" data-peek="Audiovisual">
+        <span class="r">Audiovisual <i>@</i> <span class="nw"><b>Freelance</b><span class="chev" aria-hidden="true">▾</span></span></span><span class="y">2015–2018</span>
+      </button>
+      <div class="detail-wrap" id="d-av" role="region" aria-labelledby="r-av" inert>
+        <div class="detail-clip">
+          <div class="detail">
+            <div class="detail-grid">
+              <div class="detail-text">
+                <h3>Audiovisual</h3>
+                <p>Alongside studying and my first TV jobs, I made things on my own: a YouTube channel, short films, commercials and radio content.</p>
+                <ul class="credits">
+                  <li><b>Música Pra Quem?</b><span>2016–2018 · Co-founder, producer, host &amp; editor of a YouTube channel on the Brazilian independent music scene. Best Experimental Radio, TV and Internet Project 2017, Cásper Líbero. <a class="inline" href="https://www.youtube.com/channel/UCW5Z_cDCl9ViiU5_5duqTzg" target="_blank" rel="noopener">Channel ↗</a></span></li>
+                  <li><b>Jogo da Meia Noite</b><span>2016 · Production, casting &amp; sound capture for the short film. <a class="inline" href="https://www.youtube.com/watch?v=Cynlaqkd0Zs" target="_blank" rel="noopener">Watch ↗</a></span></li>
+                  <li><b>Vem Comigo: Reciclagem</b><span>2015 · Videographer &amp; host, TV Gazeta, aired on open TV</span></li>
+                  <li><b>Punto Com</b><span>2015 · General producer of the video commercial, voiceover of the radio spot. Best Direction &amp; Best Audiovisual Producer, Cásper Líbero</span></li>
+                  <li><b>2G conteúdo</b><span>2015 · Writing, voiceover, editing &amp; production of radio and internet content</span></li>
+                </ul>
+              </div>
+              <a class="yt media" href="https://www.youtube.com/watch?v=Cynlaqkd0Zs" target="_blank" rel="noopener" aria-label="Watch Jogo da Meia Noite on YouTube">
+                <img src="https://i.ytimg.com/vi/Cynlaqkd0Zs/hqdefault.jpg" alt="" loading="lazy">
+                <span class="yt-label">Jogo da Meia Noite · Watch on YouTube ↗</span>
+              </a>
             </div>
           </div>
         </div>
@@ -666,6 +724,7 @@
         <li><b>Paris 2024</b> Olympic Games</li>
         <li><b>Milano-Cortina 2026</b> Olympic Games</li>
         <li>Canadian &amp; U.S. elections</li>
+        <li>Eurovision: Canada's Choice</li>
         <li>Royal events</li>
         <li>The Giller Prize</li>
         <li>Family Feud Canada</li>
@@ -677,7 +736,7 @@
     </div>
     <div>
       <h2 class="label">Photographed</h2>
-      <ul class="plainlist"><li>BADBADNOTGOOD</li><li>São Paulo Fashion Week 2016</li></ul>
+      <ul class="plainlist"><li>BADBADNOTGOOD</li><li>DoWestFest</li><li>Listening Room Toronto</li><li>São Paulo Fashion Week 2016</li></ul>
     </div>
     <div>
       <h2 class="label">Languages</h2>
